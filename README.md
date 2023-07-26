@@ -4,8 +4,8 @@
 
 **react-native-reanimated-graph** is a a Line Chart implementation using library **react-native-reanimated** and **react-native-svg**. It is used in the [Birdwingo mobile app](https://www.birdwingo.com) to show user portfolio graphs and market graphs.
 
-<img src="./assets/demo.gif" height="200">
-<img src="./assets/demo2.gif" height="200">
+<img src="./src/assets/images/demo.gif" height="200">
+<img src="./src/assets/images/demo2.gif" height="200">
 
 ## Installation
 
