@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create( {
+  globalContainer: {
+    flex: 1,
+    width: '100%',
+  },
   container: {
-    paddingBottom: 0,
+    flex: 1,
+    width: '100%',
     flexDirection: 'row',
   },
 } );

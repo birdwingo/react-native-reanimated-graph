@@ -1,45 +1,74 @@
-import { DerivedValue, SharedValue } from 'react-native-reanimated';
+import { ReactNode } from 'react';
+import { LayoutChangeEvent, ViewProps, TextProps } from 'react-native';
+import { SharedValue } from 'react-native-reanimated';
 
-export interface ChartProps {
-  width?: number,
+export interface ReanimatedGraphProps {
+  // props
+  xAxis?: number[],
+  yAxis?: number[],
+  color?: string,
+  widthRatio?: number,
+  selectionArea?: 'none' | 'default' | 'custom',
+  selectionAreaData?: number[],
   height?: number,
-  padding?: number,
-  onHover?: ( profit: number, timestamp: number, index: number ) => void,
-  onPaning?: ( val: boolean ) =>void,
+  animated?: boolean,
+  animationDuration?: number,
+  type?: 'curve' | 'line',
+  maxPoints?: number,
+  showXAxisLegend?: boolean,
+  xAxisLegendQuantity?: number,
+  showYAxisLegend?: boolean,
+  yAxisLegendQuantity?: number,
+  showExtremeValues?: boolean,
+  showBlinkingDot?: boolean,
+  showSelectionDot?: boolean,
+  selectionLines?: 'horizontal' | 'vertical' | 'both' | 'none',
+  selectionLineColor?: string,
+  gestureEnabled?: boolean,
+  containerStyle?: ViewProps['style'],
+  graphStyle?: ViewProps['style'],
+  textStyle?: TextProps['style'],
+  // render functions
+  renderXAxisLegend?: ( value: number, index: number ) => ReactNode | string | number,
+  renderYAxisLegend?: ( value: number, index: number ) => ReactNode | string | number,
+  renderExtremeValue?: ( value: number, type: 'min' | 'max' ) => ReactNode | string | number,
+  // callbacks
+  onGestureStart?: () => void,
+  onGestureEnd?: () => void,
+  onGestureUpdate?: ( xValue: number, yValue: number, index: number ) => void,
 }
 
-export interface ChartLabelProps {
-  width: SharedValue<number>,
-  points: DerivedValue<{ x: number, y: number }[]>,
-}
-
-export type Period = '1D' | '1W' | '1M' | '1Y' | 'A';
-
-export interface LabelsProps {
-  max: { x: number, y: number },
-  min: { x: number, y: number }
-}
-
-export interface LabelsData {
-  max: { value: number, index: number },
-  min: { value: number, index: number },
-}
-
-export interface ChartCaptionProps {
-  height?: number,
-  extremeValues: DerivedValue<number[]>,
-  period: SharedValue<Period>,
-}
-
-export type ChartPublicMethods = {
-  updateData: (
-    xAxis: number[],
-    yAxis: number[],
-    profit: number,
-    period: Period,
+export type ReanimatedGraphPublicMethods = {
+  updateData: ( data : {
+    xAxis: ReanimatedGraphProps['xAxis'],
+    yAxis: ReanimatedGraphProps['yAxis'],
+    color?: ReanimatedGraphProps['color'],
+    widthRatio?: ReanimatedGraphProps['widthRatio'],
+    selectionArea?: ReanimatedGraphProps['selectionArea'],
+    selectionAreaData?: ReanimatedGraphProps['selectionAreaData'],
+    showBlinkingDot?: ReanimatedGraphProps['showBlinkingDot'], }
   ) => void
 };
 
-export type ChartLabelPublicMethods = {
-  setData: ( { max, min } : LabelsData ) =>void,
+export interface PointData {
+  x: number,
+  y: number,
+}
+
+export interface RawDataProps {
+  x: number[],
+  y: number[],
+}
+
+export type DataProps = {
+  from: PointData[],
+  to: RawDataProps,
 };
+
+export interface GraphWrapperProps {
+  children: React.ReactNode;
+  width: SharedValue<number>;
+  height: number;
+  style?: ViewProps['style'];
+  onLayout: ( e: LayoutChangeEvent ) => void;
+}
