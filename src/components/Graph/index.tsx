@@ -18,7 +18,9 @@ import {
 } from '../../core/constants/data';
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
-import { calculatePoints, reducePoints, compareObjects } from '../../core/helpers/worklets';
+import {
+  calculatePoints, reducePoints, compareObjects, checkRatio,
+} from '../../core/helpers/worklets';
 import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
 import Legend from '../Legend';
@@ -65,7 +67,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const lastCall = useSharedValue( Date.now() );
   const width = useSharedValue( 0 );
-  const widthRatioValue = useSharedValue( widthRatio );
+  const widthRatioValue = useSharedValue( checkRatio( widthRatio ) );
   const graphWidth = useDerivedValue( () => width.value * widthRatioValue.value );
 
   const progress = useSharedValue( animated ? 0 : 1 );
@@ -110,7 +112,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
     }
 
-    widthRatioValue.value = newData.widthRatio ?? widthRatio;
+    widthRatioValue.value = checkRatio( newData.widthRatio ?? widthRatio );
     selectionAreaValue.value = newData.selectionArea ?? selectionArea;
     selectionAreaDataValue.value = newData.selectionAreaData ?? selectionAreaData;
     showBlinkingDotValue.value = newData.showBlinkingDot ?? showBlinkingDot;

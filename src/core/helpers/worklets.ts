@@ -56,6 +56,14 @@ export const compareObjects = (
 
 };
 
+export const checkRatio = ( value: number ) => {
+
+  'worklet';
+
+  return Math.max( 0.1, Math.min( 1, value ) );
+
+};
+
 export const calculateExtremeValues = ( data: number[], quantity = AXIS_LEGEND_QUANTITY ) => {
 
   'worklet';
