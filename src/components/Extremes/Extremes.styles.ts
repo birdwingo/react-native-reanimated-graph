@@ -4,7 +4,7 @@ import { EXTREME_COLOR, EXTREME_PADDING } from '../../core/constants/data';
 export default StyleSheet.create( {
   container: {
     flex: 1,
-    width: '100%',
+    position: 'absolute',
   },
   extreme: {
     shadowOffset: {

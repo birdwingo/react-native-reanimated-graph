@@ -2,12 +2,13 @@ import { View, Text } from 'react-native';
 import React, {
   FC, useState, memo, useMemo,
 } from 'react';
-import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
+import { runOnJS, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated';
 import { ExtremeValuesProps, ExtremesProps } from '../../core/dto/extremesDTO';
 import ExtremesStyles from './Extremes.styles';
 import Icon from '../Icon';
 import { calculatePoints, compareObjects } from '../../core/helpers/worklets';
 import { EXTREME_COLOR, EXTREME_PADDING } from '../../core/constants/data';
+import { AnimatedView } from '../Animated';
 
 const Extremes: FC<ExtremesProps> = ( {
   width, height, data, yAxisQuantity, textStyle, renderFunction,
@@ -84,12 +85,22 @@ const Extremes: FC<ExtremesProps> = ( {
   const renderedMin = useMemo( () => ( renderFunction ? renderFunction( roundedMin, 'min' ) : roundedMin ), [ roundedMin ] );
   const renderedMax = useMemo( () => ( renderFunction ? renderFunction( roundedMax, 'max' ) : roundedMax ), [ roundedMax ] );
 
+  const animatedStyle = useAnimatedStyle( () => ( { width: width.value } ), [ width.value ] );
+
   return (
-    <View style={[ { height }, ExtremesStyles.container ]}>
+    <AnimatedView style={[ { height }, ExtremesStyles.container, animatedStyle ]}>
       <View style={[ ExtremesStyles.extreme, labelStyle.max ]}>
         {![ 'string', 'number' ].includes( typeof renderedMax )
           ? renderedMax
-          : <Text style={[ ExtremesStyles.text, textStyle ]}>{renderedMax}</Text>}
+          : (
+            <Text
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              style={[ ExtremesStyles.text, textStyle ]}
+            >
+              {renderedMax}
+            </Text>
+          )}
         <View style={[ arrowStyle.max, ExtremesStyles.iconBottom ]}>
           <Icon icon="arrow" fill={EXTREME_COLOR} />
         </View>
@@ -97,12 +108,20 @@ const Extremes: FC<ExtremesProps> = ( {
       <View style={[ ExtremesStyles.extreme, labelStyle.min ]}>
         {![ 'string', 'number' ].includes( typeof renderedMin )
           ? renderedMin
-          : <Text style={[ ExtremesStyles.text, textStyle ]}>{renderedMin}</Text>}
+          : (
+            <Text
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              style={[ ExtremesStyles.text, textStyle ]}
+            >
+              {renderedMin}
+            </Text>
+          )}
         <View style={[ arrowStyle.min, ExtremesStyles.iconTop ]}>
           <Icon icon="arrow" fill={EXTREME_COLOR} />
         </View>
       </View>
-    </View>
+    </AnimatedView>
   );
 
 };

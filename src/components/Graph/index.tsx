@@ -186,7 +186,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   }, [] );
 
   const Graph = useMemo( () => (
-    <GraphWrapper width={graphWidth} height={height} onLayout={onLayout} style={graphStyle}>
+    <GraphWrapper width={width} height={height} onLayout={onLayout} style={graphStyle}>
       <GraphPath pathRef={pathRef} points={points} type={type} />
       <SelectionArea
         width={graphWidth}
