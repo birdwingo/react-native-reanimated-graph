@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { EXTREME_COLOR, EXTREME_PADDING } from '../../core/constants/data';
 
 export default StyleSheet.create( {
   container: {
-    position: 'absolute',
+    flex: 1,
+    width: '100%',
   },
-  default: {
+  extreme: {
     shadowOffset: {
       width: 0,
       height: 10,
@@ -12,22 +14,23 @@ export default StyleSheet.create( {
     shadowOpacity: 1,
     shadowRadius: 20,
     elevation: 10,
-    padding: 5,
+    padding: EXTREME_PADDING,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2A2A2C',
+    backgroundColor: EXTREME_COLOR,
+    position: 'absolute',
   },
   text: {
     fontSize: 12,
   },
   iconBottom: {
     position: 'absolute',
-    bottom: -4,
+    bottom: -EXTREME_PADDING,
     transform: [ { rotate: '180deg' } ],
   },
   iconTop: {
     position: 'absolute',
-    top: -4,
+    top: -EXTREME_PADDING,
   },
 } );

@@ -45,6 +45,17 @@ export const between = ( a: number, b: number, progress: number ) => {
 
 };
 
+export const compareObjects = (
+  a: any[] | { [key: string]: any },
+  b: any[] | { [key: string]: any },
+) => {
+
+  'worklet';
+
+  return JSON.stringify( a ) === JSON.stringify( b );
+
+};
+
 export const calculateExtremeValues = ( data: number[], quantity = AXIS_LEGEND_QUANTITY ) => {
 
   'worklet';

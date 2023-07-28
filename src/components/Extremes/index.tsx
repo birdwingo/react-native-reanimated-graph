@@ -1,44 +1,47 @@
-import { View, Text, LayoutChangeEvent } from 'react-native';
+import { View, Text } from 'react-native';
 import React, {
   FC, useState, memo, useMemo,
 } from 'react';
-import {
-  runOnJS, useAnimatedReaction, useAnimatedStyle, useDerivedValue, useSharedValue,
-} from 'react-native-reanimated';
-import { ExtremesProps } from '../../core/dto/extremesDTO';
-import { AnimatedView } from '../Animated';
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
+import { ExtremeValuesProps, ExtremesProps } from '../../core/dto/extremesDTO';
 import ExtremesStyles from './Extremes.styles';
 import Icon from '../Icon';
+import { calculatePoints, compareObjects } from '../../core/helpers/worklets';
+import { EXTREME_COLOR, EXTREME_PADDING } from '../../core/constants/data';
 
 const Extremes: FC<ExtremesProps> = ( {
-  width, points, data, textStyle, renderFunction,
+  width, height, data, yAxisQuantity, textStyle, renderFunction,
 } ) => {
 
-  const [ values, setValues ] = useState( { max: 0, min: 0 } );
-  const { max, min } = values;
+  const [ values, setValues ] = useState<ExtremeValuesProps>( {
+    max: { value: 0, pos: { x: 0, y: 0 }, reverse: false },
+    min: { value: 0, pos: { x: 0, y: 0 }, reverse: false },
+  } );
 
-  const maxLayout = useSharedValue( { width: 0, height: 0 } );
-  const minLayout = useSharedValue( { width: 0, height: 0 } );
+  const max = values?.max;
+  const min = values?.min;
 
-  const maxPos = useDerivedValue( () => points.value[data.value.to.y.indexOf( max ) ?? 0] );
-  const minPos = useDerivedValue( () => points.value[data.value.to.y.indexOf( min ) ?? 0] );
-  const maxPosReverse = useDerivedValue( () => ( width.value / 2 < maxPos.value?.x ) );
-  const minPosReverse = useDerivedValue( () => ( width.value / 2 < minPos.value?.x ) );
+  const labelStyle = useMemo( () => ( {
+    max: {
+      bottom: height - max.pos.y + EXTREME_PADDING * 2,
+      ...( max.reverse
+        ? { right: width.value - max.pos.x - EXTREME_PADDING * 2 }
+        : { left: max.pos.x - EXTREME_PADDING * 2 } ),
+      opacity: max.value === min.value ? 0 : 1,
+    },
+    min: {
+      top: min.pos.y + EXTREME_PADDING * 2,
+      ...( min.reverse
+        ? { right: width.value - min.pos.x - EXTREME_PADDING * 2 }
+        : { left: min.pos.x - EXTREME_PADDING * 2 } ),
+      opacity: max.value === min.value ? 0 : 1,
+    },
+  } ), [ values ] );
 
-  const labelMax = useAnimatedStyle( () => ( {
-    top: ( maxPos.value?.y ?? 0 ) - maxLayout.value.height - 6,
-    left: ( maxPos.value?.x ?? 0 ) - ( maxPosReverse.value ? maxLayout.value.width - 8 : 8 ),
-  } ) );
-  const labelMin = useAnimatedStyle( () => ( {
-    top: ( minPos.value?.y ?? 0 ) + 6,
-    left: ( minPos.value?.x ?? 0 ) - ( minPosReverse.value ? minLayout.value.width - 8 : 8 ),
-  } ) );
-  const arrowMax = useAnimatedStyle(
-    () => ( { left: maxPosReverse.value ? maxLayout.value.width - 13 : 4 } ),
-  );
-  const arrowMin = useAnimatedStyle(
-    () => ( { left: minPosReverse.value ? minLayout.value.width - 13 : 4 } ),
-  );
+  const arrowStyle = useMemo( () => ( {
+    max: max.reverse ? { right: EXTREME_PADDING } : { left: EXTREME_PADDING },
+    min: min.reverse ? { right: EXTREME_PADDING } : { left: EXTREME_PADDING },
+  } ), [ values ] );
 
   const findExtremes = () => {
 
@@ -47,56 +50,58 @@ const Extremes: FC<ExtremesProps> = ( {
     const newMax = Math.max( ...data.value.to.y );
     const newMin = Math.min( ...data.value.to.y );
 
-    runOnJS( setValues )( { max: newMax, min: newMin } );
+    const points = calculatePoints( data.value, 1, width.value, height, yAxisQuantity );
+
+    const maxIndex = data.value.to.y.indexOf( newMax );
+    const minIndex = data.value.to.y.indexOf( newMin );
+
+    const newMaxPos = points[maxIndex];
+    const newMinPos = points[minIndex];
+
+    const newMaxPosReverse = width.value / 2 < newMaxPos.x;
+    const newMinPosReverse = width.value / 2 < newMinPos.x;
+
+    const newValues = {
+      max: { value: newMax, pos: newMaxPos, reverse: newMaxPosReverse },
+      min: { value: newMin, pos: newMinPos, reverse: newMinPosReverse },
+    };
+
+    if ( compareObjects( values, newValues ) ) {
+
+      return;
+
+    }
+
+    runOnJS( setValues )( newValues );
 
   };
 
-  useAnimatedReaction( () => data.value, () => findExtremes(), [ data.value ] );
+  useAnimatedReaction( () => data.value, () => findExtremes(), [ data.value, width.value ] );
 
-  const roundedMax = Math.round( values.max * 100 ) / 100;
-  const roundedMin = Math.round( values.min * 100 ) / 100;
+  const roundedMax = useMemo( () => Math.round( max.value * 100 ) / 100, [ max.value ] );
+  const roundedMin = useMemo( () => Math.round( min.value * 100 ) / 100, [ min.value ] );
 
   const renderedMin = useMemo( () => ( renderFunction ? renderFunction( roundedMin, 'min' ) : roundedMin ), [ roundedMin ] );
   const renderedMax = useMemo( () => ( renderFunction ? renderFunction( roundedMax, 'max' ) : roundedMax ), [ roundedMax ] );
 
-  if ( roundedMax === roundedMin ) {
-
-    return null;
-
-  }
-
   return (
-    <View>
-      <AnimatedView
-        style={[ ExtremesStyles.container, labelMax, ExtremesStyles.default ]}
-        onLayout={( e: LayoutChangeEvent ) => {
-
-          maxLayout.value = e.nativeEvent.layout;
-
-        }}
-      >
+    <View style={[ { height }, ExtremesStyles.container ]}>
+      <View style={[ ExtremesStyles.extreme, labelStyle.max ]}>
         {![ 'string', 'number' ].includes( typeof renderedMax )
           ? renderedMax
           : <Text style={[ ExtremesStyles.text, textStyle ]}>{renderedMax}</Text>}
-        <AnimatedView style={[ arrowMax, ExtremesStyles.iconBottom ]}>
-          <Icon icon="arrow" fill="#2A2A2C" />
-        </AnimatedView>
-      </AnimatedView>
-      <AnimatedView
-        style={[ ExtremesStyles.container, labelMin, ExtremesStyles.default ]}
-        onLayout={( e: LayoutChangeEvent ) => {
-
-          minLayout.value = e.nativeEvent.layout;
-
-        }}
-      >
+        <View style={[ arrowStyle.max, ExtremesStyles.iconBottom ]}>
+          <Icon icon="arrow" fill={EXTREME_COLOR} />
+        </View>
+      </View>
+      <View style={[ ExtremesStyles.extreme, labelStyle.min ]}>
         {![ 'string', 'number' ].includes( typeof renderedMin )
           ? renderedMin
           : <Text style={[ ExtremesStyles.text, textStyle ]}>{renderedMin}</Text>}
-        <AnimatedView style={[ arrowMin, ExtremesStyles.iconTop ]}>
-          <Icon icon="arrow" fill="#2A2A2C" />
-        </AnimatedView>
-      </AnimatedView>
+        <View style={[ arrowStyle.min, ExtremesStyles.iconTop ]}>
+          <Icon icon="arrow" fill={EXTREME_COLOR} />
+        </View>
+      </View>
     </View>
   );
 

@@ -18,7 +18,7 @@ import {
 } from '../../core/constants/data';
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
-import { calculatePoints, reducePoints } from '../../core/helpers/worklets';
+import { calculatePoints, reducePoints, compareObjects } from '../../core/helpers/worklets';
 import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
 import Legend from '../Legend';
@@ -121,8 +121,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
     if ( newXAxis?.length && newYAxis?.length ) {
 
-      if ( JSON.stringify( newXAxis ) === JSON.stringify( xAxis )
-      && JSON.stringify( newYAxis ) === JSON.stringify( yAxis ) ) {
+      if ( compareObjects( { x: newXAxis, y: newYAxis }, rawData.value ) ) {
 
         return;
 
@@ -154,7 +153,6 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
     if ( onGestureUpdate ) {
 
-      lastCall.value = Date.now();
       onGestureUpdate(
         rawData.value.y[normalizedIndex],
         rawData.value.x[normalizedIndex],
@@ -172,6 +170,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     if ( active.value
       && ( lastCall.value < Date.now() - WAIT || [ graphWidth.value, 0 ].includes( x.value ) ) ) {
 
+      lastCall.value = Date.now();
       runOnJS( callback )();
 
     }
@@ -206,9 +205,10 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
       <BlinkingDot show={showBlinkingDotValue} color={colorValue} points={points} />
       {showExtremeValues && (
       <Extremes
-        width={width}
-        points={points}
+        width={graphWidth}
+        height={height}
         data={data}
+        yAxisQuantity={yAxisLegendQuantity}
         textStyle={textStyle}
         renderFunction={renderExtremeValue}
       />
