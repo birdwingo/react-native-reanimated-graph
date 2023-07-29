@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create( {
   yContainer: {
     justifyContent: 'space-between',
-    width: 50,
+    maxWidth: 50,
   },
   xContainer: {
     flex: 1,
