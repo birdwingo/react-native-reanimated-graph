@@ -49,5 +49,20 @@
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "typescript": "^5.1.6"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.tsx",
+      "require": "./src/index.tsx"
+    },
+    "./src": {
+      "import": "./src/index.tsx",
+      "require": "./src/index.tsx",
+      "exclude": [
+        "./src/core",
+        "./src/components",
+        "./src/assets"
+      ]
+    }
   }
 }
