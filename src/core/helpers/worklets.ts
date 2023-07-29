@@ -129,13 +129,14 @@ export const calculatePoints = (
   if ( maxY === minY ) {
 
     return [
-      { x: 0, y: height - CHART_OFFSET }, { x: width, y: height - CHART_OFFSET },
+      { x: CHART_OFFSET, y: height - CHART_OFFSET },
+      { x: width - CHART_OFFSET, y: height - CHART_OFFSET },
     ];
 
   }
 
   const step = {
-    x: width / ( ( x.length - 1 ) || 1 ),
+    x: ( width - CHART_OFFSET * 2 ) / ( ( x.length - 1 ) || 1 ),
     y: ( height - CHART_OFFSET * 2 ) / ( ( maxY - minY ) || 1 ),
   };
 
@@ -147,14 +148,14 @@ export const calculatePoints = (
 
       const oldDataIndex = Math.floor( from.length / y.length * i );
       newPoints.push( {
-        x: step.x * i,
+        x: CHART_OFFSET + step.x * i,
         y: between( from[oldDataIndex].y, CHART_OFFSET + ( maxY - y[i] ) * step.y, progress ),
       } );
 
     } else {
 
       newPoints.push( {
-        x: step.x * i,
+        x: CHART_OFFSET + step.x * i,
         y: CHART_OFFSET + ( maxY - y[i] ) * step.y,
       } );
 

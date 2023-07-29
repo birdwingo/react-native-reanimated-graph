@@ -14,7 +14,7 @@ import {
 import GraphStyles from './Graph.styles';
 import { useGesture } from '../../core/hooks';
 import {
-  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, MAX_POINTS, WAIT,
+  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, CHART_OFFSET, MAX_POINTS, WAIT,
 } from '../../core/constants/data';
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
@@ -149,8 +149,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   const callback = useCallback( () => {
 
     const { length } = rawData.value.x;
-    const step = graphWidth.value / ( length - 1 );
-    const index = x.value / step;
+    const step = ( graphWidth.value - CHART_OFFSET * 2 ) / ( length - 1 );
+    const index = ( x.value - CHART_OFFSET ) / step;
     const normalizedIndex = Math.max( 0, Math.min( length - 1, Math.round( index ) ) );
 
     if ( onGestureUpdate ) {

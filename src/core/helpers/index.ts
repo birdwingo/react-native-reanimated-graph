@@ -1,12 +1,5 @@
 import { RefObject } from 'react';
-import { Vibration } from 'react-native';
 import { Path } from 'react-native-svg';
-
-export const vibrate = () => {
-
-  Vibration.vibrate( [ 100, 200 ] );
-
-};
 
 export const findPointOnPath = ( pathRef: RefObject<Path>, x: number ) => {
 

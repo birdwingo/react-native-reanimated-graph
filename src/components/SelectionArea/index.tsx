@@ -115,7 +115,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
       {showSelectionDot && (
         <>
           <AnimatedCircle animatedProps={animatedCircleProps} fill={color} r="3" />
-          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} fillOpacity="0.1" r="13" />
+          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} fillOpacity="0.1" r="12" />
         </>
       )}
     </>
