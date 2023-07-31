@@ -4,7 +4,9 @@
   "description": "The react-native-reanimated-graph package is a powerful and versatile library designed to empower developers with the ability to create stunning and interactive graphs and charts in their React Native applications. Leveraging the potential of React Native and Reanimated 3, this package offers an optimized and performant solution for rendering dynamic graphs that respond seamlessly to user interactions.",
   "main": "src/index.tsx",
   "source": "src/index.tsx",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
   "repository": "https://github.com/birdwingo/react-native-reanimated-graph.git",
   "keywords": [
     "react-native",
@@ -40,11 +42,6 @@
     "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.2.16",
     "@types/react-native": "^0.72.2",
-    "react": "18.2.0",
-    "react-native": "0.72.3",
-    "react-native-gesture-handler": "2.12.0",
-    "react-native-reanimated": "3.4.0",
-    "react-native-svg": "13.10.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-airbnb-typescript": "^16.1.0",
