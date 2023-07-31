@@ -156,8 +156,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     if ( onGestureUpdate ) {
 
       onGestureUpdate(
-        rawData.value.y[normalizedIndex],
         rawData.value.x[normalizedIndex],
+        rawData.value.y[normalizedIndex],
         normalizedIndex,
       );
 
