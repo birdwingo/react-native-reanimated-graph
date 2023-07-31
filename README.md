@@ -4,8 +4,10 @@
 
 `react-native-reanimated-graph` is a React Native component that provides a customizable and animated graph for displaying data. It allows you to visualize data points on a graph and supports various configuration options to customize the appearance and behavior of the graph.
 
-<img src="./src/assets/images/demo.gif" height="150">
-<img src="./src/assets/images/demo2.gif" height="150">
+<div style="flex-direction:row;">
+  <img src="./src/assets/images/demo.gif" height="150">
+  <img src="./src/assets/images/demo2.gif" height="150">
+</div>
 
 ## Installation
 
