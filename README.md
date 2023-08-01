@@ -5,8 +5,8 @@
 `react-native-reanimated-graph` is a React Native component that provides a customizable and animated graph for displaying data. It allows you to visualize data points on a graph and supports various configuration options to customize the appearance and behavior of the graph. It is used in the [Birdwingo mobile app](https://www.birdwingo.com) to show user portfolio graphs and market graphs.
 
 <div style="flex-direction:row;">
-  <img src="./src/assets/images/demo.gif" height="150">
-  <img src="./src/assets/images/demo2.gif" height="150">
+  <img src="./src/assets/images/demo.gif" width="300">
+  <img src="./src/assets/images/demo2.gif" width="300">
 </div>
 
 ## Installation
