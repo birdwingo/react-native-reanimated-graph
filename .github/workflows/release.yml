@@ -14,6 +14,10 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - name: Set up git user for release
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
       - run: npm run release
       - name: Push changes
         env:
