@@ -19,10 +19,16 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
       - run: npm run release
+      - name: Push changes
+        run: git push --follow-tags origin main
       - run: npm run build
       - name: Get version from package-lock.json
         id: get_version
         run: echo "::set-output name=version::$(node -p "require('./package-lock.json').version")"
+      - name: Get changelog
+        run: |
+          CHANGELOG=$(tail -n +$(grep -n "## \[v${{ steps.get_version.outputs.version }}\]" CHANGELOG.md | cut -d ":" -f 1) CHANGELOG.md)
+          echo "::set-output name=changelog::${CHANGELOG}"
       - name: Create Release
         uses: actions/create-release@v1
         env:
@@ -30,3 +36,4 @@ jobs:
         with:
           tag_name: "v${{ steps.get_version.outputs.version }}"
           release_name: "v${{ steps.get_version.outputs.version }}"
+          body: ${{ steps.get_changelog.outputs.changelog }}
