@@ -20,6 +20,8 @@ jobs:
           git config --global user.name "GitHub Actions"
       - run: npm run release
       - name: Push changes
+        env:
+          GH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         run: git push --follow-tags origin main
       - run: npm run build
       - name: Get version from package-lock.json
