@@ -1,6 +1,6 @@
 # @birdwingo/react-native-reanimated-graph
 
-🚀 Supercharged Performance with React-Native-Reanimated: Our library leverages the power of react-native-reanimated to ensure fluid animations and top-tier speed, making your graphs shine even with hefty data sets..
+🚀 Supercharged Performance with React-Native-Reanimated: Our library leverages the power of react-native-reanimated to ensure fluid animations and top-tier speed, making your graphs shine even with hefty data sets.
 
 📊 Versatile Graphing: Whether it's SVG, Cubic Bezier, or any other graph type, we've got you covered.
 
