@@ -1,5 +1,24 @@
 # @birdwingo/react-native-reanimated-graph
 
+🚀 Supercharged Performance with React-Native-Reanimated: Our library leverages the power of react-native-reanimated to ensure fluid animations and top-tier speed, making your graphs shine even with hefty data sets.
+📊 Versatile Graphing: Whether it's SVG, Cubic Bezier, or any other graph type, we've got you covered.
+
+🎨 Customizable: Tons of optional properties to make the graph fit perfectly within your app's design.
+
+🖌 Smooth Visuals: Leveraging the power of Cubic Bezier for that polished, professional look.
+
+📱 React-Native Optimized: Tailored specifically for React-Native, ensuring seamless integration and performance on both iOS and Android.
+
+🔄 Dynamic Data Friendly: Easily handle real-time data updates without any performance hiccups.
+
+💡 Well-documented: Clear and concise documentation to get you up and running in no time.
+
+🌍 Community-Driven: We believe in the power of open-source. Join our community, contribute, or simply enjoy the product!
+
+🔧 Regular Updates: We're continuously improving. Stay tuned for regular updates and feature additions.
+
+❤️ Support & Collaboration: Having issues or suggestions? Our team and community are here to help!
+
 ## About
 
 `react-native-reanimated-graph` is a React Native component that provides a customizable and animated graph for displaying data. It allows you to visualize data points on a graph and supports various configuration options to customize the appearance and behavior of the graph. It is used in the [Birdwingo mobile app](https://www.birdwingo.com) to show user portfolio graphs and market graphs.
