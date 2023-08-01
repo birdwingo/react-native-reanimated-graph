@@ -1,8 +1,7 @@
 name: Create Github Release
 on:
-  pull_request:
-    types: [closed]
-    branch: main
+  push:
+    branch: test
 jobs:
   release:
     if: github.event.pull_request.merged == true
@@ -21,7 +20,7 @@ jobs:
       - run: npm run release
       - name: Push changes
         env:
-          GH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: git push --follow-tags origin main
       - run: npm run build
       - name: Get version from package-lock.json
@@ -34,7 +33,7 @@ jobs:
       - name: Create Release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: "v${{ steps.get_version.outputs.version }}"
           release_name: "v${{ steps.get_version.outputs.version }}"
