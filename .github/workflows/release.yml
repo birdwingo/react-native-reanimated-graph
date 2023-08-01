@@ -14,6 +14,10 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
+      - name: Set up git user for release
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
       - run: npm run release
       - run: npm run build
       - name: Get version from package-lock.json
