@@ -22,7 +22,7 @@ jobs:
           git config --global user.name "GitHub Actions"
       - run: npm run release
       - name: Push changes
-        run: git push --follow-tags origin main
+        run: git push --follow-tags origin test
       - run: npm run build
       - name: Get version from package-lock.json
         id: get_version
