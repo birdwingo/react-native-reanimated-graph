@@ -106,7 +106,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const updateData: ReanimatedGraphPublicMethods['updateData'] = useCallback( ( newData ) => {
 
-    if ( newData.color && newData.color !== color ) {
+    if ( newData.color ) {
 
       setColorValue( newData.color );
 
@@ -216,7 +216,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
       />
       )}
     </GraphWrapper>
-  ), [] );
+  ), [ colorValue ] );
 
   useAnimatedReaction(
     () => x.value,
