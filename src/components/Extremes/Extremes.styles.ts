@@ -6,6 +6,10 @@ export default StyleSheet.create( {
     flex: 1,
     position: 'absolute',
   },
+  extremeContainer: {
+    position: 'absolute',
+    backgroundColor: 'red',
+  },
   extreme: {
     shadowOffset: {
       width: 0,
@@ -21,8 +25,21 @@ export default StyleSheet.create( {
     backgroundColor: EXTREME_COLOR,
     position: 'absolute',
   },
+  extremeMax: {
+    bottom: 0,
+  },
+  extremeMin: {
+    top: 0,
+  },
+  extremeLeft: {
+    left: 0,
+  },
+  extremeRight: {
+    right: 0,
+  },
   text: {
     fontSize: 12,
+    flex: 1,
   },
   iconBottom: {
     position: 'absolute',
