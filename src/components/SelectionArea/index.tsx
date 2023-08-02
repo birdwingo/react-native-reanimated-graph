@@ -63,17 +63,25 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
     return { x: 0, width: selection.value.cx };
 
   } );
-  const selectionHorizontal = useAnimatedProps( () => ( { opacity: opacity.value, d: `M0,${selection.value.cy}L${width.value},${selection.value.cy}` } ) );
-  const selectionVertical = useAnimatedProps( () => ( { opacity: opacity.value, d: `M${selection.value.cx},0L${selection.value.cx},${height}` } ) );
+  const selectionHorizontal = useAnimatedProps( () => ( { opacity: opacity.value, d: `M0 ${selection.value.cy}L${width.value} ${selection.value.cy}` } ) );
+  const selectionVertical = useAnimatedProps( () => ( { opacity: opacity.value, d: `M${selection.value.cx} 0L${selection.value.cx} ${height}` } ) );
   const animatedCircleProps = useAnimatedProps(
     () => ( { ...selection.value, opacity: opacity.value } ),
   );
 
   const updateSelection = useCallback( () => {
 
-    const { x: cx, y: cy } = findPointOnPath( pathRef, x.value );
+    if ( !active.value ) {
 
-    selection.value = { cx, cy, opacity: 1 };
+      selection.value = { cx: 0, cy: 0, opacity: 0 };
+
+    } else {
+
+      const { x: cx, y: cy } = findPointOnPath( pathRef, x.value );
+
+      selection.value = { cx: cx || 0, cy: cy || 0, opacity: 1 };
+
+    }
 
   }, [] );
 
@@ -85,15 +93,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
   useAnimatedReaction(
     () => active.value,
-    ( res, prev ) => {
-
-      if ( res !== prev ) {
-
-        selection.value = { cx: 0, cy: 0, opacity: 0 };
-
-      }
-
-    },
+    ( res, prev ) => res !== prev && runOnJS( updateSelection )(),
     [ active.value ],
   );
 

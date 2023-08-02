@@ -14,7 +14,7 @@ import {
 import GraphStyles from './Graph.styles';
 import { useGesture } from '../../core/hooks';
 import {
-  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, CHART_OFFSET, MAX_POINTS, WAIT,
+  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, CHART_OFFSET, DEFAULT_HEIGHT, MAX_POINTS, WAIT,
 } from '../../core/constants/data';
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
@@ -33,7 +33,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   widthRatio = 1,
   selectionArea = 'default',
   selectionAreaData = [],
-  height = 200,
+  height = DEFAULT_HEIGHT,
   animated = true,
   animationDuration = ANIMATION_DURATION,
   type = 'curve',
@@ -106,13 +106,13 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const updateData: ReanimatedGraphPublicMethods['updateData'] = useCallback( ( newData ) => {
 
-    if ( newData.color && newData.color !== color ) {
+    if ( newData.color ) {
 
       setColorValue( newData.color );
 
     }
 
-    widthRatioValue.value = checkRatio( newData.widthRatio ?? widthRatio );
+    widthRatioValue.value = withTiming( checkRatio( newData.widthRatio ?? widthRatio ) );
     selectionAreaValue.value = newData.selectionArea ?? selectionArea;
     selectionAreaDataValue.value = newData.selectionAreaData ?? selectionAreaData;
     showBlinkingDotValue.value = newData.showBlinkingDot ?? showBlinkingDot;
@@ -216,7 +216,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
       />
       )}
     </GraphWrapper>
-  ), [] );
+  ), [ colorValue ] );
 
   useAnimatedReaction(
     () => x.value,
