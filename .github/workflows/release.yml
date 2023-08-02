@@ -51,6 +51,6 @@ jobs:
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://raw.githubusercontent.com/birdwingo/react-native-reanimated-graph/main/src/assets/images/logo.png
         SLACK_MESSAGE: New Release ${{ steps.get_version.outputs.version }} ${{ job.status == 'success' && 'has been created' || 'has been failed' }}
-        SLACK_TITLE: Graph release :rocket:
+        SLACK_TITLE: 'Graph release :rocket:'
         SLACK_USERNAME: GitHub
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
