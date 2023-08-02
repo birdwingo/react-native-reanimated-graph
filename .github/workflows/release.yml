@@ -39,3 +39,18 @@ jobs:
           tag_name: "v${{ steps.get_version.outputs.version }}"
           release_name: "v${{ steps.get_version.outputs.version }}"
           body: ${{ steps.get_changelog.outputs.changelog }}
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: frontend
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://raw.githubusercontent.com/birdwingo/react-native-reanimated-graph/main/src/assets/images/logo.png
+        SLACK_MESSAGE: Github Release ${{ steps.get_version.outputs.version }} ${{ job.status == 'success' && 'was successful' || 'failed' }}
+        SLACK_TITLE: Graph release :rocket:
+        SLACK_USERNAME: GitHub
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
