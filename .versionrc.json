@@ -1,0 +1,24 @@
+{
+  "types": [
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "docs", "section": "Documentation Changes" },
+    { "type": "chore", "hidden": true },
+    { "type": "refactor", "section": "Refactors" },
+    { "type": "test", "section": "Tests" }
+  ],
+  "bumpFiles": [
+    {
+      "filename": "package.json",
+      "type": "json"
+    },
+    {
+      "filename": "package-lock.json",
+      "type": "json"
+    }
+  ],
+  "changelogHeader": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n",
+  "commitUrlFormat": "https://github.com/birdwingo/react-native-reanimated-graph/commit/{{hash}}",
+  "issueUrlFormat": "https://github.com/birdwingo/react-native-reanimated-graph/issues/{{id}}",
+  "commitTemplate": "- {{message}} [{{hash}}]({{commitUrl}})\n"
+}
