@@ -30,7 +30,7 @@ jobs:
         SLACK_CHANNEL: frontend
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://raw.githubusercontent.com/birdwingo/react-native-reanimated-graph/main/src/assets/images/logo.png
-        SLACK_MESSAGE: NPM Release ${{ github.event.release.tag_name }} ${{ job.status == 'success' && 'was successful' || 'failed' }}
-        SLACK_TITLE: Graph npm release :rocket:
+        SLACK_MESSAGE: Publish Release ${{ github.event.release.tag_name }} ${{ job.status == 'success' && 'has been successful' || 'has been failed' }}
+        SLACK_TITLE: Graph publish release :rocket:
         SLACK_USERNAME: NPM
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
