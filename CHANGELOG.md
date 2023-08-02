@@ -2,9 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### 1.0.5 (2023-08-02)
+### [1.0.5](https://github.com/birdwingo/react-native-reanimated-graph/compare/v1.0.3...v1.0.5) (2023-08-02)
 
-### 1.0.4 (2023-08-01)
+
+### Bug Fixes
+
+* default graph height ([9c77d94](https://github.com/birdwingo/react-native-reanimated-graph/commit/9c77d94c15c099b19fb9a7166f1e564cc2cac756))
+* github auth ([dbb35d4](https://github.com/birdwingo/react-native-reanimated-graph/commit/dbb35d4e0f96ccab74a1480189295d6e13dba30d))
+* github auth ([010c9f7](https://github.com/birdwingo/react-native-reanimated-graph/commit/010c9f7effeaf21a18af5e9243fc6b659b517564))
+* graph ios crash ([b3aed4d](https://github.com/birdwingo/react-native-reanimated-graph/commit/b3aed4d9fe2740ea826d7752bda69d48124721a0))
+* change graph color ([db7cfa1](https://github.com/birdwingo/react-native-reanimated-graph/commit/db7cfa1ab3005f51bd1c972ed11a8535dc4ac65b))
+* changelog ([6f60c88](https://github.com/birdwingo/react-native-reanimated-graph/commit/6f60c88ccb39554f0795e60377710b0523be858c))
+* changelog ([532623f](https://github.com/birdwingo/react-native-reanimated-graph/commit/532623f48d95c79cbda224768787a9d0c79314ca))
+* release changelog ([912d51d](https://github.com/birdwingo/react-native-reanimated-graph/commit/912d51d1804856220a99089840a0b9cc5410c443))
+* smooth change of width ([1e919ab](https://github.com/birdwingo/react-native-reanimated-graph/commit/1e919abaf632be151481ca89d74416a1000da292))
+
+### [1.0.4](https://github.com/birdwingo/react-native-reanimated-graph/compare/v1.0.3...v1.0.4) (2023-08-02)
+
+
+### Bug Fixes
+
+* default graph height ([9c77d94](https://github.com/birdwingo/react-native-reanimated-graph/commit/9c77d94c15c099b19fb9a7166f1e564cc2cac756))
+* github auth ([dbb35d4](https://github.com/birdwingo/react-native-reanimated-graph/commit/dbb35d4e0f96ccab74a1480189295d6e13dba30d))
+* github auth ([010c9f7](https://github.com/birdwingo/react-native-reanimated-graph/commit/010c9f7effeaf21a18af5e9243fc6b659b517564))
+* graph ios crash ([b3aed4d](https://github.com/birdwingo/react-native-reanimated-graph/commit/b3aed4d9fe2740ea826d7752bda69d48124721a0))
+* change graph color ([db7cfa1](https://github.com/birdwingo/react-native-reanimated-graph/commit/db7cfa1ab3005f51bd1c972ed11a8535dc4ac65b))
+* changelog ([6f60c88](https://github.com/birdwingo/react-native-reanimated-graph/commit/6f60c88ccb39554f0795e60377710b0523be858c))
+* changelog ([532623f](https://github.com/birdwingo/react-native-reanimated-graph/commit/532623f48d95c79cbda224768787a9d0c79314ca))
+* release changelog ([912d51d](https://github.com/birdwingo/react-native-reanimated-graph/commit/912d51d1804856220a99089840a0b9cc5410c443))
+* smooth change of width ([1e919ab](https://github.com/birdwingo/react-native-reanimated-graph/commit/1e919abaf632be151481ca89d74416a1000da292))
 
 ### 1.0.3 (2023-08-01)
 
