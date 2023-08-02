@@ -14,7 +14,7 @@ import {
 import GraphStyles from './Graph.styles';
 import { useGesture } from '../../core/hooks';
 import {
-  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, CHART_OFFSET, MAX_POINTS, WAIT,
+  ANIMATION_DURATION, AXIS_LEGEND_QUANTITY, CHART_OFFSET, DEFAULT_HEIGHT, MAX_POINTS, WAIT,
 } from '../../core/constants/data';
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
@@ -33,7 +33,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   widthRatio = 1,
   selectionArea = 'default',
   selectionAreaData = [],
-  height = 200,
+  height = DEFAULT_HEIGHT,
   animated = true,
   animationDuration = ANIMATION_DURATION,
   type = 'curve',

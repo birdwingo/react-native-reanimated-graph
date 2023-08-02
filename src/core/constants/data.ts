@@ -4,6 +4,7 @@ export const WAIT = 250;
 export const MAX_POINTS = 512;
 export const AXIS_LEGEND_QUANTITY = 4;
 export const MASK_ID = 'animated-graph-mask';
+export const DEFAULT_HEIGHT = 200;
 
 export const EXTREME_PADDING = 4;
 export const EXTREME_COLOR = '#2A2A2C';
