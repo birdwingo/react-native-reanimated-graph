@@ -112,7 +112,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
     }
 
-    widthRatioValue.value = checkRatio( newData.widthRatio ?? widthRatio );
+    widthRatioValue.value = withTiming( checkRatio( newData.widthRatio ?? widthRatio ) );
     selectionAreaValue.value = newData.selectionArea ?? selectionArea;
     selectionAreaDataValue.value = newData.selectionAreaData ?? selectionAreaData;
     showBlinkingDotValue.value = newData.showBlinkingDot ?? showBlinkingDot;
