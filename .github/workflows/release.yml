@@ -34,7 +34,7 @@ jobs:
           CHANGELOG=$(awk '/^### \[[0-9]+\.[0-9]+\.[0-9]+\]/{if (version!="") {exit}; version=$2} version!="" {print}' CHANGELOG.md)
           echo "::set-output name=changelog::${CHANGELOG}"
       - name: Create Release
-        uses: actions/create-release@v1
+        uses: actions/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
         with:

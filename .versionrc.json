@@ -20,5 +20,6 @@
   "changelogHeader": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n",
   "commitUrlFormat": "https://github.com/birdwingo/react-native-reanimated-graph/commit/{{hash}}",
   "issueUrlFormat": "https://github.com/birdwingo/react-native-reanimated-graph/issues/{{id}}",
-  "commitTemplate": "- {{message}} [{{hash}}]({{commitUrl}})\n"
+  "commitTemplate": "- {{message}} [{{hash}}]({{commitUrl}})\n",
+  "compareUrlFormat": "https://github.com/birdwingo/react-native-reanimated-graph/compare/{{previousTag}}...{{currentTag}}"
 }
