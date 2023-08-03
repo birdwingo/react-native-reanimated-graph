@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+### 1.0.9 (2023-08-03)
+
+
+### Bug Fixes
+
+* changelog compare ([c2f77e6](https://github.com/birdwingo/react-native-reanimated-graph/commit/c2f77e6e7e63ef8579f0a6460e99062a9c69ec28))
+
 ### 1.0.8 (2023-08-03)
 
 
