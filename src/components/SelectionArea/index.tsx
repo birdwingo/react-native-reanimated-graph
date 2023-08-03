@@ -75,6 +75,10 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
       selection.value = { cx: 0, cy: 0, opacity: 0 };
 
+    } else if ( points.value.length === 1 ) {
+
+      selection.value = { cx: points.value[0].x, cy: points.value[0].y, opacity: 1 };
+
     } else {
 
       const { x: cx, y: cy } = findPointOnPath( pathRef, x.value );
