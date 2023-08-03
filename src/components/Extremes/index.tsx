@@ -5,7 +5,7 @@ import React, {
 import { runOnJS, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated';
 import { ExtremeValuesProps, ExtremesProps } from '../../core/dto/extremesDTO';
 import ExtremesStyles from './Extremes.styles';
-import Icon from '../Icon';
+import { Arrow } from '../Icon';
 import { calculatePoints, compareObjects } from '../../core/helpers/worklets';
 import { EXTREME_COLOR, EXTREME_PADDING } from '../../core/constants/data';
 import { AnimatedView } from '../Animated';
@@ -77,7 +77,8 @@ const Extremes: FC<ExtremesProps> = ( {
 
   };
 
-  useAnimatedReaction( () => data.value, () => findExtremes(), [ data.value, width.value ] );
+  useAnimatedReaction( () => data.value, () => findExtremes(), [ data.value ] );
+  useAnimatedReaction( () => width.value, () => findExtremes(), [ width.value ] );
 
   const roundedMax = useMemo( () => Math.round( max.value * 100 ) / 100, [ max.value ] );
   const roundedMin = useMemo( () => Math.round( min.value * 100 ) / 100, [ min.value ] );
@@ -88,7 +89,7 @@ const Extremes: FC<ExtremesProps> = ( {
   const animatedStyle = useAnimatedStyle( () => ( { width: width.value } ), [ width.value ] );
 
   return (
-    <AnimatedView style={[ { height }, ExtremesStyles.container, animatedStyle ]}>
+    <AnimatedView style={[ { height }, ExtremesStyles.container, animatedStyle ]} testID="extremeValues">
       <View style={[ labelStyle.max, ExtremesStyles.extremeContainer ]}>
         <View style={[
           ExtremesStyles.extreme,
@@ -104,7 +105,7 @@ const Extremes: FC<ExtremesProps> = ( {
               </Text>
             )}
           <View style={[ arrowStyle.max, ExtremesStyles.iconBottom ]}>
-            <Icon icon="arrow" fill={EXTREME_COLOR} />
+            <Arrow color={EXTREME_COLOR} />
           </View>
         </View>
       </View>
@@ -118,14 +119,12 @@ const Extremes: FC<ExtremesProps> = ( {
           {![ 'string', 'number' ].includes( typeof renderedMin )
             ? renderedMin
             : (
-              <Text
-                style={[ ExtremesStyles.text, textStyle ]}
-              >
+              <Text style={[ ExtremesStyles.text, textStyle ]}>
                 {renderedMin}
               </Text>
             )}
           <View style={[ arrowStyle.min, ExtremesStyles.iconTop ]}>
-            <Icon icon="arrow" fill={EXTREME_COLOR} />
+            <Arrow color={EXTREME_COLOR} />
           </View>
         </View>
       </View>
