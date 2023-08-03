@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 import React, {
-  FC, useState, Fragment, memo, useCallback,
+  FC, useState, Fragment, memo, useCallback, useEffect,
 } from 'react';
 import { runOnJS, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated';
 import { LegendProps } from '../../core/dto/legendDTO';
@@ -38,6 +38,8 @@ const Legend: FC<LegendProps> = ( {
     [ data.value ],
   );
 
+  useEffect( () => updateData(), [] );
+
   const renderItem = useCallback( ( item: number, index: number ) => {
 
     const renderedItem = renderFunction ? renderFunction( item, index ) : item;
@@ -53,7 +55,7 @@ const Legend: FC<LegendProps> = ( {
   }, [] );
 
   return (
-    <AnimatedView style={[ LegendStyles[`${type}Container`], animatedStyle ]}>
+    <AnimatedView style={[ LegendStyles[`${type}Container`], animatedStyle ]} testID={`${type}Axis`}>
       {values?.map( ( item, index ) => (
         <Fragment key={item}>
           {renderItem( item, index )}

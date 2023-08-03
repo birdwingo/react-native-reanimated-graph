@@ -227,7 +227,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   useEffect( animate, [] );
 
   return (
-    <View style={containerStyle}>
+    <View style={containerStyle} testID="graphContainer">
       <View style={[ GraphStyles.container, { height } ]}>
         {showYAxisLegend && <Legend type="y" height={height} width={width} data={rawData} quantity={yAxisLegendQuantity} textStyle={textStyle} renderFunction={renderYAxisLegend} />}
         {gestureEnabled ? <GestureDetector gesture={gesture}>{Graph}</GestureDetector> : Graph}
