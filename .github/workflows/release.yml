@@ -28,11 +28,6 @@ jobs:
       - name: Get version from package-lock.json
         id: get_version
         run: echo "::set-output name=version::$(node -p "require('./package-lock.json').version")"
-      - name: Get changelog
-        id: get_changelog
-        run: |
-          CHANGELOG=$(awk '/^### \[[0-9]+\.[0-9]+\.[0-9]+\]/{if (version!="") {exit}; version=$2} version!="" {print}' CHANGELOG.md)
-          echo "::set-output name=changelog::${CHANGELOG}"
       - name: Create Release
         uses: actions/create-release@master
         env:
@@ -40,4 +35,3 @@ jobs:
         with:
           tag_name: "v${{ steps.get_version.outputs.version }}"
           release_name: "v${{ steps.get_version.outputs.version }}"
-          body: ${{ steps.get_changelog.outputs.changelog }}
