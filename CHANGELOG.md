@@ -1,6 +1,25 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+
+
+### 1.0.9 (2023-08-03)
+
+
+### Bug Fixes
+
+* changelog compare ([c2f77e6](https://github.com/birdwingo/react-native-reanimated-graph/commit/c2f77e6e7e63ef8579f0a6460e99062a9c69ec28))
+
+### 1.0.8 (2023-08-03)
+
+
+### Bug Fixes
+
+* release desc ([0e04b41](https://github.com/birdwingo/react-native-reanimated-graph/commit/0e04b41ad693db907186d15f25bdd1357eeaa178))
+
+### 1.0.7 (2023-08-03)
+
+### 1.0.6 (2023-08-02)
 
 ### [1.0.5](https://github.com/birdwingo/react-native-reanimated-graph/compare/v1.0.3...v1.0.5) (2023-08-02)
 
