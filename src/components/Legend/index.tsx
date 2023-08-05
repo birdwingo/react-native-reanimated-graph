@@ -22,7 +22,7 @@ const Legend: FC<LegendProps> = ( {
 
     const { values: newValues } = calculateExtremeValues( data.value[type], quantity );
 
-    if ( newValues.length === 0 || newValues[0] === newValues[newValues.length - 1] ) {
+    if ( newValues[0] === newValues[newValues.length - 1] ) {
 
       return;
 
