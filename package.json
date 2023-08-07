@@ -1,6 +1,6 @@
 {
   "name": "@birdwingo/react-native-reanimated-graph",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "The react-native-reanimated-graph package is a powerful and versatile library designed to empower developers with the ability to create stunning and interactive graphs and charts in their React Native applications. Leveraging the potential of React Native and Reanimated 3, this package offers an optimized and performant solution for rendering dynamic graphs that respond seamlessly to user interactions.",
   "main": "src/index.tsx",
   "source": "src/index.tsx",
