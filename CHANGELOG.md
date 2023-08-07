@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.12 (2023-08-07)
+
+
+### Bug Fixes
+
+* peer deps ([cecf035](https://github.com/birdwingo/react-native-reanimated-graph/commit/cecf03591c7d2f2c4d82f3d15d6085f708fd5318))
+
 ### 1.0.11 (2023-08-07)
 
 
