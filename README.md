@@ -1,5 +1,7 @@
 # @birdwingo/react-native-reanimated-graph
 
+## Features 🌟
+
 🚀 Supercharged Performance with React-Native-Reanimated: Our library leverages the power of react-native-reanimated to ensure fluid animations and top-tier speed, making your graphs shine even with hefty data sets.
 
 📊 Versatile Graphing: Whether it's SVG, Cubic Bezier, or any other graph type, we've got you covered.
@@ -80,78 +82,44 @@ export default YourComponent;
 
 ## Props
 
-- `xAxis` (optional, default: `[0, 1]`): An array of numbers representing the x-axis values of the data points.
-
-- `yAxis` (optional, default: `[0, 0]`): An array of numbers representing the y-axis values of the data points.
-
-- `color` (optional, default: `'#FFFFFF'`): The color of the graph line.
-
-- `widthRatio` (optional, default: `1`): The width ratio of the graph compared to available width.
-
-- `selectionArea` (optional, default: `'default'`): The selection area type. The selection area is highlighted while hovering over the graph. Possible values are `'none'`, `'default'`, or `'custom'`. If `custom` you need to provide `selectionAreaData`, if `default`, selection area is to the left of the gesture point.
-
-- `selectionAreaData` (optional, default: `[]`): An array of numbers representing the selection area data points.
-
-- `height` (optional, default: `200`): The height of the graph component.
-
-- `animated` (optional, default: `true`): Whether the graph should be animated.
-
-- `animationDuration` (optional, default: 750): The duration of the animation in ms.
-
-- `type` (optional, default: `'curve'`): The type of graph line. Possible values are `'curve'` or `'line'`.
-
-- `maxPoints` (optional, default: `512`): The maximum number of data points to display on the graph. If the data has more points than `maxPoints`, the data will be reduced so that it does not affect the shape of the graph.
-
-- `showXAxisLegend` (optional, default: `false`): Whether to show the x-axis legend.
-
-- `xAxisLegendQuantity` (optional, default: `4`): The quantity of x-axis legend values to display.
-
-- `showYAxisLegend` (optional, default: `false`): Whether to show the y-axis legend.
-
-- `yAxisLegendQuantity` (optional, default: `4`): The quantity of y-axis legend values to display.
-
-- `showExtremeValues` (optional, default: `true`): Whether to show extreme values (min and max) on the graph.
-
-- `showBlinkingDot` (optional, default: `false`): Whether to show a blinking dot on the graph. (Will be placed at the last point of the graph)
-
-- `showSelectionDot` (optional, default: `true`): Whether to show the selection dot on the graph while hovering.
-
-- `selectionLines` (optional, default: `'both'`): The type of selection lines to display. Possible values are `'horizontal'`, `'vertical'`, `'both'`, or `'none'`.
-
-- `selectionLineColor` (optional, default: `'#D4D4D4'`): The color of the selection lines.
-
-- `gestureEnabled` (optional, default: `true`): Whether to enable gestures on the graph.
-
-- `containerStyle` (optional): The style object to customize the container of the graph.
-
-- `graphStyle` (optional): The style object to customize the graph.
-
-- `textStyle` (optional): The style object to customize the text elements in the graph.
-
-- `renderXAxisLegend` (optional): A function to render custom x-axis legend values. It takes two arguments:
-  - `value` (number): The x-axis value for which the legend is being rendered.
-  - `index` (number): The index of the x-axis value on legend.
-
-- `renderYAxisLegend` (optional): A function to render custom y-axis legend values. It takes two arguments:
-  - `value` (number): The y-axis value for which the legend is being rendered.
-  - `index` (number): The index of the y-axis value on legend.
-
-- `renderExtremeValue` (optional): A function to render custom extreme values. It takes two arguments:
-  - `value` (number): The extreme value to be rendered.
-  - `type` (`'min'` or `'max'`): The type of extreme value, either minimum or maximum.
-
-- `onGestureStart` (optional): A callback function invoked when a gesture is started on the graph.
-
-- `onGestureEnd` (optional): A callback function invoked when a gesture is ended on the graph.
-
-- `onGestureUpdate` (optional): A callback function invoked when a gesture is updated on the graph. It takes three arguments:
-  - `xValue` (number): The x-axis value at the position of the gesture.
-  - `yValue` (number): The y-axis value at the position of the gesture.
-  - `index` (number): The index of the nearest data point to the gesture position.
+ Name                    | Type                                         | Default value           | Description       
+-------------------------|----------------------------------------------|-------------------------|---------------------
+ `xAxis`                 | number[]                                     | [0, 1]                  | An array of numbers representing the x-axis values of the data points.
+ `yAxis`                 | number[]                                     | [0, 0]                  | An array of numbers representing the y-axis values of the data points.
+ `color`                 | string                                       | '#FFFFFF'               | The color of the graph line.
+ `widthRatio`            | number (0 - 1)                               | 1                       | The width ratio of the graph compared to available width.
+ `selectionArea`         | 'default'\|'none'\|'custom'                  | 'default'               | The selection area type. The selection area is highlighted while hovering over the graph. If `custom` you need to provide `selectionAreaData`, if `default`, selection area is to the left of the gesture point.
+ `selectionAreaData`     | number[]                                     | []                      | An array of numbers representing the selection area data points.
+ `height`                | number                                       | 200                     | The height of the graph component.
+ `animated`              | boolean                                      | true                    | Whether the graph should be animated.
+ `animationDuration`     | number                                       | 750                     | The duration of the animation in ms.
+ `type`                  | 'curve'\|'line'                              | 'curve'                 | The type of graph line.
+ `maxPoints`             | number                                       | 512                     | The maximum number of data points to display on the graph. If the data has more points than `maxPoints`, the data will be reduced so that it does not affect the shape of the graph.
+ `showXAxisLegend`       | boolean                                      | false                   | Whether to show the x-axis legend.
+ `xAxisLegendQuantity`   | number                                       | 4                       | The quantity of x-axis legend values to display.
+ `showYAxisLegend`       | boolean                                      | false                   | Whether to show the y-axis legend.
+ `yAxisLegendQuantity`   | number                                       | 4                       | The quantity of y-axis legend values to display.
+ `showExtremeValues`     | boolean                                      | true                    | Whether to show extreme values (min and max) on the graph.
+ `showBlinkingDot`       | boolean                                      | false                   | Whether to show a blinking dot on the graph. (Will be placed at the last point of the graph)
+ `showSelectionDot`      | boolean                                      | true                    | Whether to show the selection dot on the graph while hovering.
+ `selectionLines`        |'horizontal'\|'vertical'\|'both'\|'none'      | 'both'                  | The type of selection lines to display.
+ `selectionLineColor`    | string                                       | '#D4D4D4'               | The color of the selection lines.
+ `gestureEnabled`        | boolean                                      | true                    | Whether to enable gestures on the graph.
+ `containerStyle`        | ViewProps['style']                           |                         | The style object to customize the container of the graph.
+ `graphStyle`            | ViewProps['style']                           |                         | The style object to customize the graph.
+ `textStyle`             | TextProps['style']                           |                         | The style object to customize the text elements in the graph.
+ `renderXAxisLegend`     | (value: number, index: number) => void       |                         | A function to render custom x-axis legend values. It takes two arguments, `value` - the x-axis value for which the legend is being rendered & `index` - the index of the x-axis value on legend.
+ `renderYAxisLegend`     | (value: number, index: number) => void       |                         | A function to render custom y-axis legend values. It takes two arguments, `value` - the y-axis value for which the legend is being rendered & `index` - the index of the y-axis value on legend.
+ `renderExtremeValue`    | (value: number, type: 'min'\|'max') => void  |                         | A function to render custom extreme values. It takes two arguments, `value` - the extreme value to be rendered, `type` - the type of extreme value, either minimum or maximum.
+ `onGestureStart`        | () => void                                   |                         | A callback function invoked when a gesture is started on the graph.
+ `onGestureEnd`          | () => void                                   |                         | A callback function invoked when a gesture is ended on the graph.
+ `onGestureUpdate`       | (x: number, y: number, index: number) => void|                         | A callback function invoked when a gesture is updated on the graph. It takes three arguments, `x` - the x-axis value at the position of the gesture, `y` - the y-axis value at the position of the gesture, `index` - the index of the nearest data point to the gesture position.
 
 ## Public Methods
 
-- `updateData(data: { xAxis: number[], yAxis: number[], color?: string, widthRatio?: number, selectionArea?: 'none' | 'default' | 'custom', selectionAreaData?: number[], showBlinkingDot?: boolean }): void`: Use this method to update the data displayed on the graph dynamically.
+Name                  | Type                                                                                          | Description
+----------------------|-----------------------------------------------------------------------------------------------|--------------
+`updateData`          | ({xAxis, yAxis, color, widthRatio, selectionArea, selectionAreaData, showBlinkingDot}) => void| Use this method to update the data displayed on the graph dynamically. Types for data argument are the same as mentioned above.
 
 ## Sponsor
 
