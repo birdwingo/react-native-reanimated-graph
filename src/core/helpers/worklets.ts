@@ -107,7 +107,7 @@ export const calculateExtremeValues = ( data: number[], quantity = AXIS_LEGEND_Q
   return {
     max: roundedMax,
     min: roundedMin,
-    values,
+    values: [ ...new Set( values ) ],
   };
 
 };
