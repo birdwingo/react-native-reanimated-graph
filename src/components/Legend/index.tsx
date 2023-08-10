@@ -22,12 +22,6 @@ const Legend: FC<LegendProps> = ( {
 
     const { values: newValues } = calculateExtremeValues( data.value[type], quantity );
 
-    if ( newValues[0] === newValues[newValues.length - 1] ) {
-
-      return;
-
-    }
-
     runOnJS( setValues )( newValues.reverse() );
 
   };
@@ -55,7 +49,7 @@ const Legend: FC<LegendProps> = ( {
   }, [] );
 
   return (
-    <AnimatedView style={[ LegendStyles[`${type}Container`], animatedStyle ]} testID={`${type}Axis`}>
+    <AnimatedView style={[ LegendStyles[`${type}Container`], animatedStyle, values.length === 1 && LegendStyles.flexEnd ]} testID={`${type}Axis`}>
       {values?.map( ( item, index ) => (
         <Fragment key={item}>
           {renderItem( item, index )}
