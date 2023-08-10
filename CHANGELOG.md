@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.15 (2023-08-10)
+
+
+### Bug Fixes
+
+* legend values ([a7405de](https://github.com/birdwingo/react-native-reanimated-graph/commit/a7405de4442c2fb996c9f5e735d50dc8d61d8f81))
+
 ### 1.0.14 (2023-08-09)
 
 ### 1.0.13 (2023-08-09)
