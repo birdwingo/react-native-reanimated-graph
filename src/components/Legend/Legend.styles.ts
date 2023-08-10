@@ -16,5 +16,5 @@ export default StyleSheet.create( {
   flexEnd: {
     justifyContent: 'flex-end',
     paddingBottom: 6,
-  }
+  },
 } );
