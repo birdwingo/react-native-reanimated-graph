@@ -13,23 +13,15 @@ export const reducePoints = ( originalPoints : number[], maxPoints = MAX_POINTS 
 
   const points = [ originalPoints[0] ];
 
-  for ( let i = 1; i <= maxPoints; ++i ) {
+  for ( let i = 1; i < maxPoints; ++i ) {
 
     const index = ( originalPoints.length - 1 ) * i / maxPoints;
 
-    if ( Math.abs( index - Math.round( index ) ) < 0.00001 ) {
+    const j = Math.floor( index );
+    const a = index - Math.floor( index );
+    const b = Math.ceil( index ) - index;
 
-      points.push( originalPoints[index] );
-
-    } else {
-
-      const j = Math.floor( index );
-      const a = index - Math.floor( index );
-      const b = Math.ceil( index ) - index;
-
-      points.push( originalPoints[j] * b + originalPoints[j + 1] * a );
-
-    }
+    points.push( originalPoints[j] * b + originalPoints[j + 1] * a );
 
   }
 
@@ -136,8 +128,8 @@ export const calculatePoints = (
   }
 
   const step = {
-    x: ( width - CHART_OFFSET * 2 ) / ( ( x.length - 1 ) || 1 ),
-    y: ( height - CHART_OFFSET * 2 ) / ( ( maxY - minY ) || 1 ),
+    x: ( width - CHART_OFFSET * 2 ) / ( x.length - 1 ),
+    y: ( height - CHART_OFFSET * 2 ) / ( maxY - minY ),
   };
 
   const newPoints = [];
@@ -246,11 +238,7 @@ export const findNumbersAround = ( target: number, numbers: number[] ) => {
     const midIndex = Math.floor( ( startIndex + endIndex ) / 2 );
     const midValue = numbers[midIndex];
 
-    if ( midValue === target ) {
-
-      return [ numbers[midIndex - 1], midValue ];
-
-    } if ( midValue < target ) {
+    if ( midValue < target ) {
 
       startIndex = midIndex + 1;
 

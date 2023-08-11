@@ -91,6 +91,7 @@ export default YourComponent;
  `selectionArea`         | 'default'\|'none'\|'custom'                  | 'default'               | The selection area type. The selection area is highlighted while hovering over the graph. If `custom` you need to provide `selectionAreaData`, if `default`, selection area is to the left of the gesture point.
  `selectionAreaData`     | number[]                                     | []                      | An array of numbers representing the selection area data points.
  `height`                | number                                       | 200                     | The height of the graph component.
+ `defaultWidth`          | number                                       |                         | If `defaultWidth` is not provided, width will be 100% of parent element.
  `animated`              | boolean                                      | true                    | Whether the graph should be animated.
  `animationDuration`     | number                                       | 750                     | The duration of the animation in ms.
  `type`                  | 'curve'\|'line'                              | 'curve'                 | The type of graph line.

@@ -22,7 +22,7 @@ export const findPointOnPath = ( pathRef: RefObject<Path>, x: number ) => {
 
     } else {
 
-      return point;
+      return point ?? { x: 0, y: 0 };
 
     }
 
