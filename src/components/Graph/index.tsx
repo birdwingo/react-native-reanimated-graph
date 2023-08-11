@@ -34,6 +34,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   selectionArea = 'default',
   selectionAreaData = [],
   height = DEFAULT_HEIGHT,
+  defaultWidth,
   animated = true,
   animationDuration = ANIMATION_DURATION,
   type = 'curve',
@@ -66,7 +67,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   const [ colorValue, setColorValue ] = useState( color );
 
   const lastCall = useSharedValue( Date.now() );
-  const width = useSharedValue( 0 );
+  const width = useSharedValue( defaultWidth ?? 0 );
   const widthRatioValue = useSharedValue( checkRatio( widthRatio ) );
   const graphWidth = useDerivedValue( () => width.value * widthRatioValue.value );
 
@@ -181,7 +182,11 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const onLayout = useCallback( ( e: LayoutChangeEvent ) => {
 
-    width.value = e.nativeEvent.layout.width;
+    if ( !defaultWidth ) {
+
+      width.value = e.nativeEvent.layout.width;
+
+    }
 
   }, [] );
 

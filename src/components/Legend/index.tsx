@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import { runOnJS, useAnimatedReaction, useAnimatedStyle } from 'react-native-reanimated';
 import { LegendProps } from '../../core/dto/legendDTO';
-import { calculateExtremeValues } from '../../core/helpers/worklets';
+import { calculateExtremeValues, compareObjects } from '../../core/helpers/worklets';
 import LegendStyles from './Legend.styles';
 import { AnimatedView } from '../Animated';
 
@@ -20,9 +20,15 @@ const Legend: FC<LegendProps> = ( {
 
     'worklet';
 
-    const { values: newValues } = calculateExtremeValues( data.value[type], quantity );
+    const newValues = calculateExtremeValues( data.value[type], quantity ).values.reverse();
 
-    runOnJS( setValues )( newValues.reverse() );
+    if ( compareObjects( newValues, values ) ) {
+
+      return;
+
+    }
+
+    runOnJS( setValues )( newValues );
 
   };
 

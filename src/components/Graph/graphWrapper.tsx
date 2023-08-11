@@ -14,7 +14,7 @@ const GraphWrapper: FC<GraphWrapperProps> = ( {
   } ) );
 
   return (
-    <AnimatedView onLayout={onLayout} style={[ style, GraphStyles.globalContainer ]}>
+    <AnimatedView onLayout={onLayout} style={[ style, GraphStyles.globalContainer ]} testID="graphWrapper">
       <AnimatedSvg style={animatedStyle}>
         {children}
       </AnimatedSvg>

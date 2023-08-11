@@ -25,7 +25,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
   gestureEnabled,
 } ) => {
 
-  const selection = useSharedValue( { cx: 0, cy: 0, opacity: 0 } );
+  const selection = useSharedValue( { cx: 0, cy: 0, opacity: active.value ? 1 : 0 } );
 
   const opacity = useDerivedValue( () => ( active.value ? selection.value.opacity : 0 ) );
 

@@ -11,6 +11,7 @@ export interface ReanimatedGraphProps {
   selectionArea?: 'none' | 'default' | 'custom',
   selectionAreaData?: number[],
   height?: number,
+  defaultWidth?: number,
   animated?: boolean,
   animationDuration?: number,
   type?: 'curve' | 'line',
