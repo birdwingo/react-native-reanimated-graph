@@ -17,9 +17,18 @@ describe( 'reducePoints worklet test', () => {
 
   } );
 
-  it( `should return the reduced length of array if length > ${MAX_POINTS}`, () => {
+  it( `should return the reduced length of array if length > ${MAX_POINTS} and length is even number`, () => {
 
     const array = Array.from( Array( MAX_POINTS * 2 ).keys() );
+    const result = reducePoints( array );
+
+    expect( result ).toHaveLength( MAX_POINTS );
+
+  } );
+
+  it( `should return the reduced length of array if length > ${MAX_POINTS} and length is odd number`, () => {
+
+    const array = Array.from( Array( MAX_POINTS * 2 + 1 ).keys() );
     const result = reducePoints( array );
 
     expect( result ).toHaveLength( MAX_POINTS );
