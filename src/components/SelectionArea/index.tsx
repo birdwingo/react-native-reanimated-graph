@@ -112,8 +112,8 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
   return (
     <>
-      <AnimatedRect mask={`url(#${MASK_ID})`} fill={color} x="0" y="0" width="100%" height="100%" fillOpacity={0.5} />
-      <AnimatedRect mask={`url(#${MASK_ID})`} animatedProps={selectionAreaProps} fill={color} y="0" height="100%" />
+      <AnimatedRect mask={`url(#${MASK_ID})`} testID="graphPath" fill={color} x="0" y="0" width="100%" height="100%" fillOpacity={0.5} />
+      <AnimatedRect mask={`url(#${MASK_ID})`} animatedProps={selectionAreaProps} fill={color} y="0" height="100%" testID="selectionArea" />
       {showHorizontal && <AnimatedPath animatedProps={selectionHorizontal} stroke={selectionLineColor} strokeDasharray="4,4" />}
       {showVertical && <AnimatedPath animatedProps={selectionVertical} stroke={selectionLineColor} strokeDasharray="4,4" />}
       {showSelectionDot && (

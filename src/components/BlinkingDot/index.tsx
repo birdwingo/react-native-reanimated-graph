@@ -59,7 +59,7 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
 
   return (
     <>
-      <AnimatedCircle animatedProps={animatedProps} fill={color} r="3" />
+      <AnimatedCircle animatedProps={animatedProps} fill={color} r="3" testID="blinkingDot" />
       <AnimatedCircle animatedProps={animationProps} fill={color} />
     </>
   );

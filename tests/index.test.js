@@ -1,6 +1,6 @@
 
 import React, { createRef } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { render, act, fireEvent } from '@testing-library/react-native';
 import ReanimatedGraph from '../src';
 import BlinkingDot from '../src/components/BlinkingDot';
@@ -40,7 +40,7 @@ describe( 'ReanimatedGraph Tests', () => {
 
     const ref = createRef();
 
-    render( <ReanimatedGraph animated={false} ref={ref} /> );
+    const { getByTestId } = render( <ReanimatedGraph animated={false} ref={ref} /> );
 
     act( () => {
 
@@ -142,7 +142,9 @@ describe( 'BlinkingDot Tests', () => {
 
   it( 'Should render without any errors', () => {
 
-    render( <BlinkingDot show={{ value: true }} color="grey" points={{ value: [ { x: 0, y: 0 } ] }} /> );
+    const { getByTestId } = render( <BlinkingDot show={{ value: true }} color="grey" points={{ value: [ { x: 0, y: 0 } ] }} /> );
+
+    expect( getByTestId( 'blinkingDot' ) ).toBeTruthy();
 
   } );
 
@@ -150,15 +152,19 @@ describe( 'BlinkingDot Tests', () => {
 
 describe( 'Extremes Tests', () => {
 
-  it( 'Should render without any errors', () => {
+  it( 'Should render without any errors', async () => {
 
-    render( <Extremes
+    const { getByTestId } = render( <Extremes
       width={{ value: 100 }}
       height={300}
       data={{ value: { from: [], to: { x: [ 0, 1 ], y: [ 0, 5 ] } } }}
       yAxisQuantity={4}
-      renderFunction={() => <View />}
+      renderFunction={(value, type) => <Text testID={`${type}Extreme`}>{value}</Text>}
     /> );
+
+    expect( getByTestId( 'extremeValues' ) ).toBeTruthy();
+    expect( getByTestId( 'maxExtreme' ) ).toHaveTextContent('5');
+    expect( getByTestId( 'minExtreme' ) ).toHaveTextContent('0');
 
   } );
 
@@ -175,6 +181,7 @@ describe( 'SelectionArea Tests', () => {
     selectionAreaData: { value: [ 0, 5, 10 ] },
     selectionLines: 'none',
     selectionLineColor: 'red',
+    gestureEnabled: true,
     color: 'blue',
     pathRef: {
       current: {
@@ -188,7 +195,9 @@ describe( 'SelectionArea Tests', () => {
 
   it( 'Should render without any errors', () => {
 
-    render( <SelectionArea {...props} /> );
+    const { getByTestId } = render( <SelectionArea {...props} /> );
+
+    expect( getByTestId( 'selectionArea' ) ).toBeTruthy();
 
   } );
 
