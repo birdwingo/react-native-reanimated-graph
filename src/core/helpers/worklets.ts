@@ -17,11 +17,19 @@ export const reducePoints = ( originalPoints : number[], maxPoints = MAX_POINTS 
 
     const index = ( originalPoints.length - 1 ) * i / maxPoints;
 
-    const j = Math.floor( index );
-    const a = index - Math.floor( index );
-    const b = Math.ceil( index ) - index;
+    if ( Math.abs( index - Math.round( index ) ) < 0.00001 ) {
 
-    points.push( originalPoints[j] * b + originalPoints[j + 1] * a );
+      points.push( originalPoints[index] );
+
+    } else {
+
+      const j = Math.floor( index );
+      const a = index - Math.floor( index );
+      const b = Math.ceil( index ) - index;
+
+      points.push( originalPoints[j] * b + originalPoints[j + 1] * a );
+
+    }
 
   }
 
