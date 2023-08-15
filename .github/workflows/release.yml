@@ -1,4 +1,4 @@
-name: Create Github Release
+name: Github Release
 on:
   pull_request:
     types: [closed]

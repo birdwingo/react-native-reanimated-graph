@@ -1,5 +1,10 @@
 # @birdwingo/react-native-reanimated-graph
 
+![npm downloads](https://img.shields.io/npm/dm/%40birdwingo/react-native-reanimated-graph)
+![npm version](https://img.shields.io/npm/v/%40birdwingo/react-native-reanimated-graph)
+![github release](https://github.com/birdwingo/react-native-reanimated-graph/actions/workflows/release.yml/badge.svg?event=pull_request)
+![npm release](https://github.com/birdwingo/react-native-reanimated-graph/actions/workflows/public.yml/badge.svg?event=release)
+
 ## Features 🌟
 
 🚀 Supercharged Performance with React-Native-Reanimated: Our library leverages the power of react-native-reanimated to ensure fluid animations and top-tier speed, making your graphs shine even with hefty data sets.
