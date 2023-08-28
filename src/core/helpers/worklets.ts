@@ -126,7 +126,7 @@ export const calculatePoints = (
   const { x, y } = data.to;
   const { max: maxY, min: minY } = calculateExtremeValues( y, quantity );
 
-  if ( maxY === minY ) {
+  if ( maxY === minY || x.length === 1 ) {
 
     return [
       { x: CHART_OFFSET, y: height - CHART_OFFSET },
