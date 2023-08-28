@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.18 (2023-08-28)
+
+
+### Bug Fixes
+
+* crash when only one x point provided ([e9ce057](https://github.com/birdwingo/react-native-reanimated-graph/commit/e9ce0577163bf0dfd5ff1bde6d5296eb45ec2833))
+
 ### 1.0.17 (2023-08-16)
 
 ### 1.0.16 (2023-08-15)
