@@ -1,17 +1,17 @@
 import React, { FC, useState } from 'react';
-import { useAnimatedReaction } from 'react-native-reanimated';
-import { GraphSectionsProps } from '~/core/dto/sectionsDTO';
+import { useAnimatedReaction, runOnJS } from 'react-native-reanimated';
+import { GraphSectionsProps } from '../../core/dto/sectionsDTO';
 import SectionItem from './item';
 
 const GraphSections: FC<GraphSectionsProps> = ( {
-  sections, sectionsColors, width, data, points,
+  sections, sectionsColors, data, points,
 } ) => {
 
   const [ colors, setColors ] = useState<string[]>( [] );
 
   useAnimatedReaction(
     () => sectionsColors.value,
-    ( res ) => setColors( res ),
+    ( res ) => runOnJS( setColors )( res ),
     [ sectionsColors.value ],
   );
 
@@ -27,7 +27,6 @@ const GraphSections: FC<GraphSectionsProps> = ( {
       color={color}
       index={index}
       data={data}
-      width={width}
       points={points}
       sections={sections}
     />

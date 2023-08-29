@@ -25,7 +25,6 @@ import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
 import Legend from '../Legend';
 import Extremes from '../Extremes';
-import GraphSections from '../Sections';
 
 const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraphProps>( ( {
   xAxis = [ 0, 1 ],
@@ -215,15 +214,15 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         points={points}
         data={data}
         gestureEnabled={gestureEnabled}
-      />
-      <GraphSections
         sections={sectionsValue}
         sectionsColors={sectionsColorsValue}
-        width={graphWidth}
-        data={data}
-        points={points}
       />
-      <BlinkingDot show={showBlinkingDotValue} color={colorValue} points={points} />
+      <BlinkingDot
+        show={showBlinkingDotValue}
+        color={colorValue}
+        points={points}
+        sectionsColors={sectionsColorsValue}
+      />
       {showExtremeValues && (
       <Extremes
         width={graphWidth}

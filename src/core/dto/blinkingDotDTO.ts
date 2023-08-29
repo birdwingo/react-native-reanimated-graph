@@ -5,4 +5,5 @@ export interface BlinkingDotProps {
   show: SharedValue<ReanimatedGraphProps['showBlinkingDot']>,
   color: ReanimatedGraphProps['color'],
   points: SharedValue<PointData[]>,
+  sectionsColors: SharedValue<string[]>,
 }

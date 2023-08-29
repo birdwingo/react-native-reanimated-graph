@@ -17,4 +17,14 @@ export interface SelectionAreaProps {
   points: SharedValue<PointData[]>,
   data: SharedValue<DataProps>,
   gestureEnabled: ReanimatedGraphProps['gestureEnabled'],
+  sections: SharedValue<number[]>,
+  sectionsColors: SharedValue<string[]>,
+}
+
+export interface SelectionDotProps {
+  selection: SharedValue<{ cx: number, cy: number, opacity: number }>;
+  opacity: SharedValue<number>;
+  color?: string;
+  sections: SharedValue<number[]>;
+  sectionsColors: SharedValue<string[]>;
 }

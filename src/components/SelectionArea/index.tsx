@@ -3,10 +3,12 @@ import {
   runOnJS, useAnimatedProps, useAnimatedReaction, useDerivedValue, useSharedValue,
 } from 'react-native-reanimated';
 import { SelectionAreaProps } from '../../core/dto/selectionAreaDTO';
-import { AnimatedCircle, AnimatedPath, AnimatedRect } from '../Animated';
+import { AnimatedPath, AnimatedRect } from '../Animated';
 import { findPointOnPath } from '../../core/helpers';
 import { MASK_ID } from '../../core/constants/data';
 import { findNumbersAround } from '../../core/helpers/worklets';
+import GraphSections from '../Sections';
+import SelectionDot from '../SelectionDot';
 
 const SelectionArea: FC<SelectionAreaProps> = ( {
   width,
@@ -23,6 +25,8 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
   points,
   data,
   gestureEnabled,
+  sections,
+  sectionsColors,
 } ) => {
 
   const selection = useSharedValue( { cx: 0, cy: 0, opacity: active.value ? 1 : 0 } );
@@ -65,9 +69,6 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
   } );
   const selectionHorizontal = useAnimatedProps( () => ( { opacity: opacity.value, d: `M0 ${selection.value.cy}L${width.value} ${selection.value.cy}` } ) );
   const selectionVertical = useAnimatedProps( () => ( { opacity: opacity.value, d: `M${selection.value.cx} 0L${selection.value.cx} ${height}` } ) );
-  const animatedCircleProps = useAnimatedProps(
-    () => ( { ...selection.value, opacity: opacity.value } ),
-  );
 
   const updateSelection = useCallback( () => {
 
@@ -117,11 +118,20 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
       {showHorizontal && <AnimatedPath animatedProps={selectionHorizontal} stroke={selectionLineColor} strokeDasharray="4,4" />}
       {showVertical && <AnimatedPath animatedProps={selectionVertical} stroke={selectionLineColor} strokeDasharray="4,4" />}
       {showSelectionDot && (
-        <>
-          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} r="3" />
-          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} fillOpacity="0.1" r="12" />
-        </>
+        <SelectionDot
+          selection={selection}
+          opacity={opacity}
+          color={color}
+          sections={sections}
+          sectionsColors={sectionsColors}
+        />
       )}
+      <GraphSections
+        sections={sections}
+        sectionsColors={sectionsColors}
+        data={data}
+        points={points}
+      />
     </>
   );
 

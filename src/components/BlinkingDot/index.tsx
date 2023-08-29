@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useState } from 'react';
 import {
   cancelAnimation, interpolate, useAnimatedProps, useAnimatedReaction, useDerivedValue,
   useSharedValue, withDelay, withRepeat, withTiming,
@@ -7,7 +7,11 @@ import { BlinkingDotProps } from '../../core/dto/blinkingDotDTO';
 import { ANIMATION_DURATION } from '../../core/constants/data';
 import { AnimatedCircle } from '../Animated';
 
-const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
+const BlinkingDot: FC<BlinkingDotProps> = ( {
+  show, color, points, sectionsColors,
+} ) => {
+
+  const [ fill, setFill ] = useState( color );
 
   const animation = useSharedValue( 0 );
 
@@ -57,10 +61,16 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
     [ show.value ],
   );
 
+  useAnimatedReaction(
+    () => sectionsColors.value,
+    ( res ) => ( res.length ? setFill( res[res.length - 1] ) : setFill( color ) ),
+    [ sectionsColors.value ],
+  );
+
   return (
     <>
-      <AnimatedCircle animatedProps={animatedProps} fill={color} r="3" testID="blinkingDot" />
-      <AnimatedCircle animatedProps={animationProps} fill={color} />
+      <AnimatedCircle animatedProps={animatedProps} fill={fill} r="3" testID="blinkingDot" />
+      <AnimatedCircle animatedProps={animationProps} fill={fill} />
     </>
   );
 
