@@ -26,6 +26,12 @@ const SelectionDot: FC<SelectionDotProps> = ( {
 
       if ( !sectionsColors.value.length ) {
 
+        if ( fill !== color ) {
+
+          runOnJS( setFill )( color );
+
+        }
+
         return;
 
       }
