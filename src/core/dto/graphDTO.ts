@@ -10,6 +10,8 @@ export interface ReanimatedGraphProps {
   widthRatio?: number,
   selectionArea?: 'none' | 'default' | 'custom',
   selectionAreaData?: number[],
+  sections?: number[],
+  sectionsColors?: string[],
   height?: number,
   defaultWidth?: number,
   animated?: boolean,
@@ -47,8 +49,10 @@ export type ReanimatedGraphPublicMethods = {
     widthRatio?: ReanimatedGraphProps['widthRatio'],
     selectionArea?: ReanimatedGraphProps['selectionArea'],
     selectionAreaData?: ReanimatedGraphProps['selectionAreaData'],
-    showBlinkingDot?: ReanimatedGraphProps['showBlinkingDot'], }
-  ) => void
+    showBlinkingDot?: ReanimatedGraphProps['showBlinkingDot'],
+    sections?: ReanimatedGraphProps['sections'],
+    sectionsColors?: ReanimatedGraphProps['sectionsColors'],
+  } ) => void
 };
 
 export interface PointData {

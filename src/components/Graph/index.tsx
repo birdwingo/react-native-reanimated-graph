@@ -25,6 +25,7 @@ import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
 import Legend from '../Legend';
 import Extremes from '../Extremes';
+import GraphSections from '../Sections';
 
 const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraphProps>( ( {
   xAxis = [ 0, 1 ],
@@ -33,6 +34,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   widthRatio = 1,
   selectionArea = 'default',
   selectionAreaData = [],
+  sections = [],
+  sectionsColors = [],
   height = DEFAULT_HEIGHT,
   defaultWidth,
   animated = true,
@@ -81,6 +84,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   const selectionAreaValue = useSharedValue<ReanimatedGraphProps['selectionArea']>( selectionArea );
   const selectionAreaDataValue = useSharedValue<ReanimatedGraphProps['selectionAreaData']>( selectionAreaData );
   const showBlinkingDotValue = useSharedValue<ReanimatedGraphProps['showBlinkingDot']>( showBlinkingDot );
+  const sectionsValue = useSharedValue( sections );
+  const sectionsColorsValue = useSharedValue( sectionsColors );
 
   const points = useDerivedValue( () => calculatePoints(
     data.value,
@@ -117,6 +122,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     selectionAreaValue.value = newData.selectionArea ?? selectionArea;
     selectionAreaDataValue.value = newData.selectionAreaData ?? selectionAreaData;
     showBlinkingDotValue.value = newData.showBlinkingDot ?? showBlinkingDot;
+    sectionsValue.value = newData.sections ?? sections;
+    sectionsColorsValue.value = newData.sectionsColors ?? sectionsColors;
 
     const { xAxis: newXAxis, yAxis: newYAxis } = newData;
 
@@ -208,6 +215,13 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         points={points}
         data={data}
         gestureEnabled={gestureEnabled}
+      />
+      <GraphSections
+        sections={sectionsValue}
+        sectionsColors={sectionsColorsValue}
+        width={graphWidth}
+        data={data}
+        points={points}
       />
       <BlinkingDot show={showBlinkingDotValue} color={colorValue} points={points} />
       {showExtremeValues && (
