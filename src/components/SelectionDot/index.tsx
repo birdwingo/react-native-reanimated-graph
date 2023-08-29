@@ -3,6 +3,7 @@ import { useAnimatedProps, useAnimatedReaction, runOnJS } from 'react-native-rea
 import { SelectionDotProps } from '../../core/dto/selectionAreaDTO';
 import { AnimatedCircle } from '../Animated';
 import { findNumbersAround, getValueFromPosition } from '../../core/helpers/worklets';
+import { CHART_OFFSET } from '../../core/constants/data';
 
 const SelectionDot: FC<SelectionDotProps> = ( {
   selection, opacity, color, sections, sectionsColors, data, width,
@@ -36,7 +37,7 @@ const SelectionDot: FC<SelectionDotProps> = ( {
 
       }
 
-      const { value } = getValueFromPosition( res.cx, width.value, data.value.to.x );
+      const { value } = getValueFromPosition( res.cx, width.value - CHART_OFFSET, data.value.to.x );
       const [ end ] = findNumbersAround( value, sections.value );
 
       const index = sections.value.indexOf( end );

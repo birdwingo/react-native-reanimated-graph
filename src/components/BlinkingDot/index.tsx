@@ -81,7 +81,7 @@ const BlinkingDot: FC<BlinkingDotProps> = ( {
       }
 
     },
-    [ sectionsColors.value ],
+    [ sectionsColors.value, data.value ],
   );
 
   return (
