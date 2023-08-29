@@ -27,4 +27,6 @@ export interface SelectionDotProps {
   color?: string;
   sections: SharedValue<number[]>;
   sectionsColors: SharedValue<string[]>;
+  data: SharedValue<DataProps>;
+  width: SharedValue<number>;
 }

@@ -19,7 +19,7 @@ import {
 import GraphWrapper from './graphWrapper';
 import GraphPath from '../GraphPath';
 import {
-  calculatePoints, reducePoints, compareObjects, checkRatio,
+  calculatePoints, reducePoints, compareObjects, checkRatio, getValueFromPosition,
 } from '../../core/helpers/worklets';
 import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
@@ -155,17 +155,18 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const callback = useCallback( () => {
 
-    const { length } = rawData.value.x;
-    const step = ( graphWidth.value - CHART_OFFSET * 2 ) / ( length - 1 );
-    const index = ( x.value - CHART_OFFSET ) / step;
-    const normalizedIndex = Math.max( 0, Math.min( length - 1, Math.round( index ) ) );
+    const { index } = getValueFromPosition(
+      x.value,
+      graphWidth.value - CHART_OFFSET * 2,
+      rawData.value.x,
+    );
 
     if ( onGestureUpdate ) {
 
       onGestureUpdate(
-        rawData.value.x[normalizedIndex],
-        rawData.value.y[normalizedIndex],
-        normalizedIndex,
+        rawData.value.x[index],
+        rawData.value.y[index],
+        index,
       );
 
     }
@@ -222,6 +223,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         color={colorValue}
         points={points}
         sectionsColors={sectionsColorsValue}
+        data={data}
+        sections={sectionsValue}
       />
       {showExtremeValues && (
       <Extremes

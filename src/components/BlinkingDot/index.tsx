@@ -1,14 +1,15 @@
 import React, { FC, memo, useState } from 'react';
 import {
-  cancelAnimation, interpolate, useAnimatedProps, useAnimatedReaction, useDerivedValue,
+  cancelAnimation, interpolate, runOnJS, useAnimatedProps, useAnimatedReaction, useDerivedValue,
   useSharedValue, withDelay, withRepeat, withTiming,
 } from 'react-native-reanimated';
 import { BlinkingDotProps } from '../../core/dto/blinkingDotDTO';
 import { ANIMATION_DURATION } from '../../core/constants/data';
 import { AnimatedCircle } from '../Animated';
+import { findNumbersAround } from '../../core/helpers/worklets';
 
 const BlinkingDot: FC<BlinkingDotProps> = ( {
-  show, color, points, sectionsColors,
+  show, color, points, sectionsColors, data, sections,
 } ) => {
 
   const [ fill, setFill ] = useState( color );
@@ -63,7 +64,23 @@ const BlinkingDot: FC<BlinkingDotProps> = ( {
 
   useAnimatedReaction(
     () => sectionsColors.value,
-    ( res ) => ( res.length ? setFill( res[res.length - 1] ) : setFill( color ) ),
+    ( res ) => {
+
+      const [ end ] = findNumbersAround(
+        data.value.to.x[data.value.to.x.length - 1],
+        sections.value,
+      );
+
+      const index = sections.value.indexOf( end );
+      const newFill = res[index] ?? color;
+
+      if ( fill !== newFill ) {
+
+        runOnJS( setFill )( newFill );
+
+      }
+
+    },
     [ sectionsColors.value ],
   );
 

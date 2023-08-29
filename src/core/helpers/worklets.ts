@@ -261,3 +261,19 @@ export const findNumbersAround = ( target: number, numbers: number[] ) => {
   return [ numbers[endIndex], numbers[startIndex] ];
 
 };
+
+export const getValueFromPosition = (
+  position: number,
+  width: number,
+  data: number[],
+) => {
+
+  'worklet';
+
+  const { length } = data;
+  const step = width / ( length - 1 );
+  const normalizedIndex = Math.max( 0, Math.min( length - 1, Math.round( position / step ) ) );
+
+  return { index: normalizedIndex, value: data[normalizedIndex] };
+
+};

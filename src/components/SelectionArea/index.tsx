@@ -6,7 +6,7 @@ import { SelectionAreaProps } from '../../core/dto/selectionAreaDTO';
 import { AnimatedPath, AnimatedRect } from '../Animated';
 import { findPointOnPath } from '../../core/helpers';
 import { MASK_ID } from '../../core/constants/data';
-import { findNumbersAround } from '../../core/helpers/worklets';
+import { findNumbersAround, getValueFromPosition } from '../../core/helpers/worklets';
 import GraphSections from '../Sections';
 import SelectionDot from '../SelectionDot';
 
@@ -49,12 +49,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
       }
 
-      const { length } = data.value.to.x;
-      const step = width.value / ( length - 1 );
-      const index = selection.value.cx / step;
-      const normalizedIndex = Math.max( 0, Math.min( length - 1, Math.round( index ) ) );
-      const value = data.value.to.x[normalizedIndex];
-
+      const { value } = getValueFromPosition( selection.value.cx, width.value, data.value.to.x );
       const [ startIndex, endIndex ] = findNumbersAround( value, selectionAreaData.value );
 
       const start = points.value[data.value.to.x.indexOf( startIndex )]?.x ?? 0;
@@ -124,6 +119,8 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
           color={color}
           sections={sections}
           sectionsColors={sectionsColors}
+          data={data}
+          width={width}
         />
       )}
       <GraphSections

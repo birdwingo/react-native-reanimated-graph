@@ -1,17 +1,17 @@
 import React, { FC, useState, useEffect } from 'react';
-import { useAnimatedProps, useAnimatedReaction } from 'react-native-reanimated';
-import { SelectionDotProps } from '~/core/dto/selectionAreaDTO';
+import { useAnimatedProps, useAnimatedReaction, runOnJS } from 'react-native-reanimated';
+import { SelectionDotProps } from '../../core/dto/selectionAreaDTO';
 import { AnimatedCircle } from '../Animated';
-import { findNumbersAround } from '~/core/helpers/worklets';
+import { findNumbersAround, getValueFromPosition } from '../../core/helpers/worklets';
 
 const SelectionDot: FC<SelectionDotProps> = ( {
-  selection, opacity, color, sections, sectionsColors,
+  selection, opacity, color, sections, sectionsColors, data, width,
 } ) => {
 
   const [ fill, setFill ] = useState( color );
 
   const animatedCircleProps = useAnimatedProps(
-    () => ( { ...selection.value, opacity: sections.value.length ? 0 : opacity.value } ),
+    () => ( { ...selection.value, opacity: opacity.value } ),
   );
 
   useEffect( () => {
@@ -30,11 +30,17 @@ const SelectionDot: FC<SelectionDotProps> = ( {
 
       }
 
-      const [ start, end ] = findNumbersAround( res.cx, sections.value );
+      const { value } = getValueFromPosition( res.cx, width.value, data.value.to.x );
+      const [ end ] = findNumbersAround( value, sections.value );
 
-      const index = sections.value.findIndex( ( item ) => item <= end && item >= start );
+      const index = sections.value.indexOf( end );
+      const newFill = sectionsColors.value[index] ?? color;
 
-      setFill( sectionsColors.value[index] ?? color );
+      if ( fill !== newFill ) {
+
+        runOnJS( setFill )( newFill );
+
+      }
 
     },
     [ selection.value ],
