@@ -25,7 +25,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
   gestureEnabled,
 } ) => {
 
-  const selection = useSharedValue( { cx: 0, cy: 0, opacity: active.value ? 1 : 0 } );
+  const selection = useSharedValue( { cx: '0', cy: '0', opacity: active.value ? 1 : 0 } );
 
   const opacity = useDerivedValue( () => ( active.value ? selection.value.opacity : 0 ) );
 
@@ -33,7 +33,7 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
     if ( !opacity.value || selectionArea.value === 'none' ) {
 
-      return { x: 0, width: width.value };
+      return { x: '0', width: String( width.value ) };
 
     }
 
@@ -41,13 +41,13 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
       if ( !selectionAreaData.value?.length ) {
 
-        return { x: 0, width: width.value };
+        return { x: '0', width: String( width.value ) };
 
       }
 
       const { length } = data.value.to.x;
       const step = width.value / ( length - 1 );
-      const index = selection.value.cx / step;
+      const index = Number( selection.value.cx ) / step;
       const normalizedIndex = Math.max( 0, Math.min( length - 1, Math.round( index ) ) );
       const value = data.value.to.x[normalizedIndex];
 
@@ -56,11 +56,11 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
       const start = points.value[data.value.to.x.indexOf( startIndex )]?.x ?? 0;
       const end = points.value[data.value.to.x.indexOf( endIndex )]?.x ?? width.value;
 
-      return { x: start, width: end - start };
+      return { x: String( start ), width: String( end - start ) };
 
     }
 
-    return { x: 0, width: selection.value.cx };
+    return { x: '0', width: selection.value.cx };
 
   } );
   const selectionHorizontal = useAnimatedProps( () => ( { opacity: opacity.value, d: `M0 ${selection.value.cy}L${width.value} ${selection.value.cy}` } ) );
@@ -73,17 +73,21 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
 
     if ( !active.value ) {
 
-      selection.value = { cx: 0, cy: 0, opacity: 0 };
+      selection.value = { cx: '0', cy: '0', opacity: 0 };
 
     } else if ( points.value.length === 1 ) {
 
-      selection.value = { cx: points.value[0].x, cy: points.value[0].y, opacity: 1 };
+      selection.value = {
+        cx: String( points.value[0].x ),
+        cy: String( points.value[0].y ),
+        opacity: 1,
+      };
 
     } else {
 
       const { x: cx, y: cy } = findPointOnPath( pathRef, x.value );
 
-      selection.value = { cx: cx || 0, cy: cy || 0, opacity: 1 };
+      selection.value = { cx: String( cx || 0 ), cy: String( cy || 0 ), opacity: 1 };
 
     }
 
