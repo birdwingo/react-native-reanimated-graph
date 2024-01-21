@@ -13,10 +13,12 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
 
   const blinkingDot = useDerivedValue( () => {
 
-    const { x: cx, y: cy } = points.value[points.value.length - 1];
+    const { x, y } = points.value[points.value.length - 1];
 
     return {
-      cx, cy, opacity: show.value ? 1 : 0,
+      cx: String( x ),
+      cy: String( y ),
+      opacity: show.value ? 1 : 0,
     };
 
   } );
