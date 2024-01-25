@@ -26,7 +26,7 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
   const animatedProps = useAnimatedProps( () => ( blinkingDot.value ) );
   const animationProps = useAnimatedProps( () => ( show.value ? {
     ...blinkingDot.value,
-    r: interpolate( animation.value, [ 0, 1 ], [ 3, 13 ] ),
+    r: String( interpolate( animation.value, [ 0, 1 ], [ 3, 13 ] ) ),
     opacity: interpolate( animation.value, [ 0, 1 ], [ 1, 0.1 ] ),
   } : blinkingDot.value ) );
 
