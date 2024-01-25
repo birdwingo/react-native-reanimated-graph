@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.21 (2024-01-25)
+
+
+### Bug Fixes
+
+* double to string conversion svg ([223a557](https://github.com/birdwingo/react-native-reanimated-graph/commit/223a557065174cc48b50203c44e48de516a62eff))
+
 ### 1.0.20 (2024-01-22)
 
 
