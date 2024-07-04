@@ -155,6 +155,29 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const callback = useCallback( () => {
 
+    if ( !smoothAnimation ) {
+
+      const index = points.value.findIndex( ( point ) => point.x >= x.value );
+      if ( index === -1 ) {
+
+        return;
+
+      }
+
+      if ( onGestureUpdate ) {
+
+        onGestureUpdate(
+          data.value.to.x[index],
+          data.value.to.y[index],
+          index,
+        );
+
+      }
+
+      return;
+
+    }
+
     const { length } = rawData.value.x;
     const step = ( graphWidth.value - CHART_OFFSET * 2 ) / ( length - 1 );
     const index = ( x.value - CHART_OFFSET ) / step;
