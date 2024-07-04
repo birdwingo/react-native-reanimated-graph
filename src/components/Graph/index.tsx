@@ -226,7 +226,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         renderFunction={renderExtremeValue}
       />
       )}
-      <Picks data={data} selectedX={x} points={points} />
+      <Picks data={data} selectedX={x} active={active} points={points} />
     </GraphWrapper>
   ), [ colorValue ] );
 
