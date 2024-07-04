@@ -25,10 +25,12 @@ import SelectionArea from '../SelectionArea';
 import BlinkingDot from '../BlinkingDot';
 import Legend from '../Legend';
 import Extremes from '../Extremes';
+import Picks from '../Picks';
 
 const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraphProps>( ( {
   xAxis = [ 0, 1 ],
   yAxis = [ 0, 0 ],
+  picks = [],
   color = '#FFFFFF',
   widthRatio = 1,
   selectionArea = 'default',
@@ -77,6 +79,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   const data = useSharedValue<DataProps>( {
     from: [ { x: 0, y: 0 }, { x: 0, y: 0 } ],
     to: { x: reducePoints( xAxis, maxPoints ), y: reducePoints( yAxis, maxPoints ) },
+    picks,
   } );
   const selectionAreaValue = useSharedValue<ReanimatedGraphProps['selectionArea']>( selectionArea );
   const selectionAreaDataValue = useSharedValue<ReanimatedGraphProps['selectionAreaData']>( selectionAreaData );
@@ -141,6 +144,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         x: reducePoints( newValues.x, maxPoints ),
         y: reducePoints( newValues.y, maxPoints ),
       },
+      picks: newData.picks ?? [],
     };
 
     animate();
@@ -220,6 +224,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         renderFunction={renderExtremeValue}
       />
       )}
+      <Picks data={data} selectedX={x} points={points} />
     </GraphWrapper>
   ), [ colorValue ] );
 

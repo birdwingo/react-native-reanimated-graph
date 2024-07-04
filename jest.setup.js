@@ -117,3 +117,11 @@ jest.mock('./src/core/hooks', () => ({
     active: { value: true }
   })
 }));
+
+jest.mock( './src/components/Picks', () => {
+
+  const View = require('react-native').View;
+
+  return () => <View />;
+
+} );

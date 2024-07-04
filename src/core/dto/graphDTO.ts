@@ -1,11 +1,14 @@
 import { ReactNode } from 'react';
 import { LayoutChangeEvent, ViewProps, TextProps } from 'react-native';
 import { SharedValue } from 'react-native-reanimated';
+// eslint-disable-next-line import/no-cycle
+import { PickProps } from './picksDTO';
 
 export interface ReanimatedGraphProps {
   // props
   xAxis?: number[],
   yAxis?: number[],
+  picks?: PickProps[],
   color?: string,
   widthRatio?: number,
   selectionArea?: 'none' | 'default' | 'custom',
@@ -43,6 +46,7 @@ export type ReanimatedGraphPublicMethods = {
   updateData: ( data : {
     xAxis: ReanimatedGraphProps['xAxis'],
     yAxis: ReanimatedGraphProps['yAxis'],
+    picks?: ReanimatedGraphProps['picks'],
     color?: ReanimatedGraphProps['color'],
     widthRatio?: ReanimatedGraphProps['widthRatio'],
     selectionArea?: ReanimatedGraphProps['selectionArea'],
@@ -64,6 +68,7 @@ export interface RawDataProps {
 export type DataProps = {
   from: PointData[],
   to: RawDataProps,
+  picks: PickProps[],
 };
 
 export interface GraphWrapperProps {
