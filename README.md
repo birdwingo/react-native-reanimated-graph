@@ -91,6 +91,7 @@ export default YourComponent;
 -------------------------|----------------------------------------------|-------------------------|---------------------
  `xAxis`                 | number[]                                     | [0, 1]                  | An array of numbers representing the x-axis values of the data points.
  `yAxis`                 | number[]                                     | [0, 0]                  | An array of numbers representing the y-axis values of the data points.
+ `picks`                 | [PickProps](#pickprops)[]                    | [0, 0]                  | An array of points that should be on graph highlited by dot.
  `color`                 | string                                       | '#FFFFFF'               | The color of the graph line.
  `widthRatio`            | number (0 - 1)                               | 1                       | The width ratio of the graph compared to available width.
  `selectionArea`         | 'default'\|'none'\|'custom'                  | 'default'               | The selection area type. The selection area is highlighted while hovering over the graph. If `custom` you need to provide `selectionAreaData`, if `default`, selection area is to the left of the gesture point.
@@ -99,6 +100,7 @@ export default YourComponent;
  `defaultWidth`          | number                                       |                         | If `defaultWidth` is not provided, width will be 100% of parent element.
  `animated`              | boolean                                      | true                    | Whether the graph should be animated.
  `animationDuration`     | number                                       | 750                     | The duration of the animation in ms.
+ `smoothAnimation`       | boolean                                      | true                    | Whether the gesture animation should be smooth or not. If false, the selection dot will be only on graph points.
  `type`                  | 'curve'\|'line'                              | 'curve'                 | The type of graph line.
  `maxPoints`             | number                                       | 512                     | The maximum number of data points to display on the graph. If the data has more points than `maxPoints`, the data will be reduced so that it does not affect the shape of the graph.
  `showXAxisLegend`       | boolean                                      | false                   | Whether to show the x-axis legend.
@@ -123,9 +125,20 @@ export default YourComponent;
 
 ## Public Methods
 
-Name                  | Type                                                                                          | Description
-----------------------|-----------------------------------------------------------------------------------------------|--------------
-`updateData`          | ({xAxis, yAxis, color, widthRatio, selectionArea, selectionAreaData, showBlinkingDot}) => void| Use this method to update the data displayed on the graph dynamically. Types for data argument are the same as mentioned above.
+Name                  | Type                                                                                                     | Description
+----------------------|----------------------------------------------------------------------------------------------------------|--------------
+`updateData`          | ({xAxis, yAxis, color, widthRatio, selectionArea, selectionAreaData, showBlinkingDot, pickProps}) => void| Use this method to update the data displayed on the graph dynamically. Types for data argument are the same as mentioned above.
+
+## Types
+
+### PickProps
+
+ Parameter             | Type                                   | Required
+-----------------------|----------------------------------------|----------------
+ `x`                   | number                                 | true
+ `y`                   | number                                 | true
+ `color`               | string                                 | true
+ `renderLabel`         | () => JSX.Element                      | false
 
 ## Sponsor
 
