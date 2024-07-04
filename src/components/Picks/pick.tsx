@@ -1,34 +1,41 @@
 import React, { FC } from 'react';
 import { useAnimatedProps, useAnimatedStyle, useDerivedValue } from 'react-native-reanimated';
-import { View } from 'react-native';
+import { CircleProps } from 'react-native-svg';
 import { PickComponentProps } from '../../core/dto/picksDTO';
-import { AnimatedCircle } from '../Animated';
+import { AnimatedCircle, AnimatedView } from '../Animated';
 
 const Pick: FC<PickComponentProps> = ( {
   xValue, color, renderLabel, data, points, selectedX,
 } ) => {
 
-  const isSelected = useDerivedValue( () => selectedX.value === xValue );
   const index = useDerivedValue( () => data.value.to.x.indexOf( xValue ) );
-  const position = useDerivedValue( () => points.value[index.value] );
+  const position = useDerivedValue( () => ( points.value[index.value]
+    ? { cx: String( points.value[index.value].x ), cy: String( points.value[index.value].y ) }
+    : undefined
+  ) );
+  const isSelected = useDerivedValue( () => selectedX.value === Number( position.value?.cx ) );
 
-  const labelStyle = useAnimatedStyle( () => ( isSelected.value
+  const labelStyle = useAnimatedStyle( () => ( ( !isSelected.value || !position.value )
     ? { display: 'none' }
     : {
       position: 'absolute',
-      top: position.value.y - 20,
-      left: position.value.x - 20,
+      top: Number( position.value.cy ) - 20,
+      left: Number( position.value.cx ) - 20,
     } ) );
-  const smallPickProps = useAnimatedProps( () => ( { ...position.value } ) );
-  const selectedPickProps = useAnimatedProps(
-    () => ( { ...position.value, opacity: isSelected ? 1 : 0 } ),
+
+  const smallPickProps = useAnimatedProps<CircleProps>( () => ( position.value
+    ? { ...position.value }
+    : { opacity: 0 }
+  ) );
+  const selectedPickProps = useAnimatedProps<CircleProps>(
+    () => ( { ...position.value, opacity: ( isSelected && position.value ) ? 1 : 0 } ),
   );
 
   return (
     <>
       <AnimatedCircle animatedProps={smallPickProps} fill={color} r="3" />
-      <AnimatedCircle animatedProps={selectedPickProps} stroke={color} strokeWidth="1" fill="transparent" r="12" />
-      {renderLabel && <View style={labelStyle}>{renderLabel()}</View>}
+      <AnimatedCircle animatedProps={selectedPickProps} stroke={color} strokeWidth="2" fill="transparent" r="8" />
+      {renderLabel && <AnimatedView style={labelStyle}>{renderLabel()}</AnimatedView>}
     </>
   );
 
