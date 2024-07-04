@@ -17,6 +17,7 @@ export interface ReanimatedGraphProps {
   defaultWidth?: number,
   animated?: boolean,
   animationDuration?: number,
+  smoothAnimation?: boolean,
   type?: 'curve' | 'line',
   maxPoints?: number,
   showXAxisLegend?: boolean,

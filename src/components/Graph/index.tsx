@@ -39,6 +39,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   defaultWidth,
   animated = true,
   animationDuration = ANIMATION_DURATION,
+  smoothAnimation = true,
   type = 'curve',
   maxPoints = MAX_POINTS,
   showXAxisLegend = false,
@@ -61,8 +62,6 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   onGestureEnd,
   onGestureUpdate,
 }, ref ) => {
-
-  const { x, active, gesture } = useGesture( { onGestureStart, onGestureEnd } );
 
   const pathRef = useRef<Path>( null );
 
@@ -92,6 +91,12 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     height,
     yAxisLegendQuantity,
   ), [ data.value, progress.value, graphWidth.value, height ] );
+
+  const { x, active, gesture } = useGesture(
+    { onGestureStart, onGestureEnd },
+    points,
+    smoothAnimation,
+  );
 
   const animate = useCallback( () => {
 
