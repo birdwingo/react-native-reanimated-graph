@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 import { PickProps, PicksProps } from '../../core/dto/picksDTO';
 import Pick from './pick';
 
-const Picks: FC<PicksProps> = ( { data, points, selectedX } ) => {
+const Picks: FC<PicksProps> = ( {
+  data, points, selectedX, active,
+} ) => {
 
   const [ picksData, setPicksData ] = useState<PickProps[]>( [] );
 
@@ -26,9 +28,10 @@ const Picks: FC<PicksProps> = ( { data, points, selectedX } ) => {
       data={data}
       points={points}
       selectedX={selectedX}
+      active={active}
     />
   ) );
 
 };
 
-export default Picks;
+export default memo( Picks );

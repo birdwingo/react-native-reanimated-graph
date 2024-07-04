@@ -15,7 +15,7 @@ export const reducePoints = (
 
   if ( currentPoints <= maxPoints ) {
 
-    return { x: originalX, y: originalY };
+    maxPoints = currentPoints;
 
   }
 

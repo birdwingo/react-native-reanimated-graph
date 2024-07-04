@@ -13,10 +13,12 @@ export interface PickComponentProps extends PickProps {
   data: SharedValue<DataProps>,
   points: SharedValue<{ x: number, y: number }[]>,
   selectedX: SharedValue<number>,
+  active: SharedValue<boolean>,
 }
 
 export interface PicksProps {
   data: SharedValue<DataProps>,
   points: SharedValue<{ x: number, y: number }[]>,
   selectedX: SharedValue<number>,
+  active: SharedValue<boolean>,
 }
