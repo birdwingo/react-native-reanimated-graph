@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { useAnimatedReaction } from 'react-native-reanimated';
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 import { PickProps, PicksProps } from '../../core/dto/picksDTO';
 import Pick from './pick';
 
@@ -9,9 +9,15 @@ const Picks: FC<PicksProps> = ( { data, points, selectedX } ) => {
 
   useAnimatedReaction(
     () => data.value,
-    ( prev, res ) => prev !== res && setPicksData( res?.picks || [] ),
+    ( prev, res ) => prev !== res && runOnJS( setPicksData )( res?.picks || [] ),
     [ data ],
   );
+
+  if ( picksData.length === 0 ) {
+
+    return null;
+
+  }
 
   return picksData.map( ( item ) => (
     <Pick
