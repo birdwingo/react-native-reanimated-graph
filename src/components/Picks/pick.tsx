@@ -5,10 +5,10 @@ import { PickComponentProps } from '../../core/dto/picksDTO';
 import { AnimatedCircle, AnimatedView } from '../Animated';
 
 const Pick: FC<PickComponentProps> = ( {
-  xValue, color, renderLabel, data, points, selectedX,
+  x, color, renderLabel, data, points, selectedX,
 } ) => {
 
-  const index = useDerivedValue( () => data.value.to.x.indexOf( xValue ) );
+  const index = useDerivedValue( () => data.value.to.x.indexOf( x ) );
   const position = useDerivedValue( () => ( points.value[index.value]
     ? { cx: String( points.value[index.value].x ), cy: String( points.value[index.value].y ) }
     : undefined

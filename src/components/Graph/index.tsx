@@ -77,7 +77,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   const rawData = useSharedValue<RawDataProps>( { x: xAxis, y: yAxis } );
   const data = useSharedValue<DataProps>( {
     from: [ { x: 0, y: 0 }, { x: 0, y: 0 } ],
-    to: { x: reducePoints( xAxis, maxPoints ), y: reducePoints( yAxis, maxPoints ) },
+    to: reducePoints( xAxis, yAxis, maxPoints, picks ),
     picks,
   } );
   const selectionAreaValue = useSharedValue<ReanimatedGraphProps['selectionArea']>( selectionArea );
@@ -145,10 +145,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     rawData.value = newValues;
     data.value = {
       from: points.value,
-      to: {
-        x: reducePoints( newValues.x, maxPoints ),
-        y: reducePoints( newValues.y, maxPoints ),
-      },
+      to: reducePoints( newValues.x, newValues.y, maxPoints, newData.picks ),
       picks: newData.picks ?? [],
     };
 
