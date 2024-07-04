@@ -32,14 +32,15 @@ const Pick: FC<PickComponentProps> = ( {
     position: 'absolute',
     top: labelTop.value,
     left: labelLeft.value,
-  } ) );
+  } ), [ isSelected.value, position.value ] );
 
   const smallPickProps = useAnimatedProps<CircleProps>( () => ( position.value
     ? { ...position.value }
     : { opacity: 0 }
-  ) );
+  ), [ position.value ] );
   const selectedPickProps = useAnimatedProps<CircleProps>(
     () => ( { ...position.value, opacity: ( isSelected.value && position.value ) ? 1 : 0 } ),
+    [ isSelected.value, position.value ],
   );
 
   const onLayout = useCallback( ( event: LayoutChangeEvent ) => {

@@ -21,9 +21,9 @@ const Picks: FC<PicksProps> = ( {
 
   }
 
-  return picksData.map( ( item ) => (
+  return picksData.map( ( item, index ) => (
     <Pick
-      key={item.x}
+      key={`pick${String( index )}`}
       {...item}
       data={data}
       points={points}
