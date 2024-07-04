@@ -1,39 +1,60 @@
 import { AXIS_LEGEND_QUANTITY, CHART_OFFSET, MAX_POINTS } from '../constants/data';
 import { ReanimatedGraphProps } from '../dto/graphDTO';
+import { PickProps } from '../dto/picksDTO';
 
-export const reducePoints = ( originalPoints : number[], maxPoints = MAX_POINTS ) => {
+export const reducePoints = (
+  originalX: number[],
+  originalY: number[],
+  maxPoints = MAX_POINTS,
+  picks: PickProps[] = [],
+) => {
 
   'worklet';
 
-  if ( originalPoints.length <= maxPoints ) {
+  const currentPoints = originalX.length;
 
-    return originalPoints;
+  if ( currentPoints <= maxPoints ) {
+
+    return { x: originalX, y: originalY };
 
   }
 
-  const points = [ originalPoints[0] ];
+  const step = ( currentPoints - 1 ) / ( maxPoints - 1 );
+  const newX: number[] = [];
+  const newY: number[] = [];
 
-  for ( let i = 1; i < maxPoints; ++i ) {
+  for ( let i = 0; i < maxPoints; i++ ) {
 
-    const index = ( originalPoints.length - 1 ) * i / maxPoints;
+    const index = Math.round( i * step );
 
-    if ( Math.abs( index - Math.round( index ) ) < 0.00001 ) {
+    const nextPick = picks.find(
+      ( pick ) => pick.x > newX[newX.length - 1] && pick.x < originalX[index],
+    );
 
-      points.push( originalPoints[index] );
+    if ( nextPick ) {
 
-    } else {
-
-      const j = Math.floor( index );
-      const a = index - Math.floor( index );
-      const b = Math.ceil( index ) - index;
-
-      points.push( originalPoints[j] * b + originalPoints[j + 1] * a );
+      newX.push( nextPick.x );
+      newY.push( nextPick.y );
 
     }
 
+    newX.push( originalX[index] );
+    newY.push( originalY[index] );
+
   }
 
-  return points;
+  const nextPick = picks.find(
+    ( pick ) => pick.x > newX[newX.length - 1],
+  );
+
+  if ( nextPick ) {
+
+    newX.push( nextPick.x );
+    newY.push( nextPick.y );
+
+  }
+
+  return { x: newX, y: newY };
 
 };
 

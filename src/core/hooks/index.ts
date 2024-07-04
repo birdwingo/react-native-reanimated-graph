@@ -29,11 +29,11 @@ const useGesture = (
 
       if ( smoothAnimation ) {
 
-        x.value = findClosestPoint( points.value, e.x ).x;
+        x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
 
       } else {
 
-        x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
+        x.value = findClosestPoint( points.value, e.x ).x;
 
       }
 
@@ -53,11 +53,11 @@ const useGesture = (
 
         if ( smoothAnimation ) {
 
-          x.value = findClosestPoint( points.value, e.x ).x;
+          x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
 
         } else {
 
-          x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
+          x.value = findClosestPoint( points.value, e.x ).x;
 
         }
 

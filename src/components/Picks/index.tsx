@@ -9,7 +9,7 @@ const Picks: FC<PicksProps> = ( { data, points, selectedX } ) => {
 
   useAnimatedReaction(
     () => data.value,
-    ( prev, res ) => prev !== res && runOnJS( setPicksData )( res?.picks || [] ),
+    ( res ) => runOnJS( setPicksData )( res?.picks || [] ),
     [ data ],
   );
 
@@ -21,7 +21,7 @@ const Picks: FC<PicksProps> = ( { data, points, selectedX } ) => {
 
   return picksData.map( ( item ) => (
     <Pick
-      key={item.xValue}
+      key={item.x}
       {...item}
       data={data}
       points={points}

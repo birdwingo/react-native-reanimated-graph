@@ -3,7 +3,8 @@ import { SharedValue } from 'react-native-reanimated';
 import { DataProps } from './graphDTO';
 
 export interface PickProps {
-  xValue: number,
+  x: number,
+  y: number,
   color: string,
   renderLabel?: () => JSX.Element,
 }

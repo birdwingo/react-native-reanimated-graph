@@ -11,27 +11,27 @@ describe( 'reducePoints worklet test', () => {
   it( `should return the same array if the array length is less than ${MAX_POINTS}`, () => {
 
     const array = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
-    const result = reducePoints( array );
+    const result = reducePoints( array, array );
 
-    expect( result ).toEqual( array );
+    expect( result.x ).toEqual( array );
 
   } );
 
   it( `should return the reduced length of array if length > ${MAX_POINTS} and length is even number`, () => {
 
     const array = Array.from( Array( MAX_POINTS * 2 ).keys() );
-    const result = reducePoints( array );
+    const result = reducePoints( array, array );
 
-    expect( result ).toHaveLength( MAX_POINTS );
+    expect( result.x ).toHaveLength( MAX_POINTS );
 
   } );
 
   it( `should return the reduced length of array if length > ${MAX_POINTS} and length is odd number`, () => {
 
     const array = Array.from( Array( MAX_POINTS * 2 + 1 ).keys() );
-    const result = reducePoints( array );
+    const result = reducePoints( array, array );
 
-    expect( result ).toHaveLength( MAX_POINTS );
+    expect( result.x ).toHaveLength( MAX_POINTS );
 
   } );
 
