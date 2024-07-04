@@ -1,14 +1,19 @@
 import { Gesture } from 'react-native-gesture-handler';
-import { runOnJS, useSharedValue } from 'react-native-reanimated';
+import { SharedValue, runOnJS, useSharedValue } from 'react-native-reanimated';
 import { useMemo } from 'react';
 import { ReanimatedGraphProps } from '../dto/graphDTO';
+import { findClosestPoint } from '../helpers/worklets';
 
 interface GestureProps {
   onGestureStart?: ReanimatedGraphProps['onGestureStart'];
   onGestureEnd?: ReanimatedGraphProps['onGestureEnd'];
 }
 
-const useGesture = ( { onGestureStart, onGestureEnd }: GestureProps = {} ) => {
+const useGesture = (
+  { onGestureStart, onGestureEnd }: GestureProps,
+  points: SharedValue<{ x: number, y: number }[]>,
+  smoothAnimation: boolean,
+) => {
 
   const x = useSharedValue( 0 );
   const active = useSharedValue( false );
@@ -19,7 +24,18 @@ const useGesture = ( { onGestureStart, onGestureEnd }: GestureProps = {} ) => {
     .onStart( ( e ) => {
 
       active.value = true;
-      x.value = e.x;
+      const firstPoint = points.value[0];
+      const lastPoint = points.value[points.value.length - 1];
+
+      if ( smoothAnimation ) {
+
+        x.value = findClosestPoint( points.value, e.x ).x;
+
+      } else {
+
+        x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
+
+      }
 
       if ( onGestureStart ) {
 
@@ -32,7 +48,18 @@ const useGesture = ( { onGestureStart, onGestureEnd }: GestureProps = {} ) => {
 
       if ( active.value ) {
 
-        x.value = e.x;
+        const firstPoint = points.value[0];
+        const lastPoint = points.value[points.value.length - 1];
+
+        if ( smoothAnimation ) {
+
+          x.value = findClosestPoint( points.value, e.x ).x;
+
+        } else {
+
+          x.value = Math.min( lastPoint.x, Math.max( firstPoint.x, e.x ) );
+
+        }
 
       }
 

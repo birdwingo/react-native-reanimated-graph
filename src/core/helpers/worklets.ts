@@ -261,3 +261,26 @@ export const findNumbersAround = ( target: number, numbers: number[] ) => {
   return [ numbers[endIndex], numbers[startIndex] ];
 
 };
+
+export const findClosestPoint = (
+  points: { x: number, y: number }[],
+  targetX: number,
+) => {
+
+  'worklet';
+
+  let closest = points[0];
+
+  for ( let i = 1; i < points.length; i++ ) {
+
+    if ( Math.abs( points[i].x - targetX ) < Math.abs( closest.x - targetX ) ) {
+
+      closest = points[i];
+
+    }
+
+  }
+
+  return closest;
+
+};
