@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.1.0 (2024-07-08)
+
+
+### Features
+
+* picks & smoothAnimation props ([c531a8c](https://github.com/birdwingo/react-native-reanimated-graph/commit/c531a8c1d077d6c766e9bc75a4f5c7bea0fdfd7e))
+
 ### 1.0.22 (2024-03-01)
 
 ### 1.0.21 (2024-01-25)
