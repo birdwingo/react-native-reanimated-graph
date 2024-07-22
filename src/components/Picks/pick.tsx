@@ -35,7 +35,7 @@ const Pick: FC<PickComponentProps> = ( {
   } ), [ isSelected.value, position.value ] );
 
   const smallPickProps = useAnimatedProps<CircleProps>( () => ( position.value
-    ? { ...position.value }
+    ? { ...position.value, opacity: 1 }
     : { opacity: 0 }
   ), [ position.value ] );
   const selectedPickProps = useAnimatedProps<CircleProps>(
