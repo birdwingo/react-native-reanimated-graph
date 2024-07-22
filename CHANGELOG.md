@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.1.1 (2024-07-22)
+
+
+### Bug Fixes
+
+* pick not shown ([ee4ecef](https://github.com/birdwingo/react-native-reanimated-graph/commit/ee4ecefc075e301e624e72832de0b2f6ad408de3))
+
 ## 1.1.0 (2024-07-08)
 
 
