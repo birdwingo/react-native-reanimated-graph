@@ -158,7 +158,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
     if ( !smoothAnimation ) {
 
       const index = points.value.findIndex( ( point ) => point.x >= x.value );
-      if ( index === -1 ) {
+      if ( index === -1 || !data.value.to.x[index] ) {
 
         return;
 

@@ -25,7 +25,7 @@ export const reducePoints = (
 
   for ( let i = 0; i < maxPoints; i++ ) {
 
-    const index = Math.round( i * step );
+    const index = maxPoints === currentPoints ? i : Math.round( i * step );
 
     const nextPick = picks.find(
       ( pick ) => pick.x > newX[newX.length - 1] && pick.x < originalX[index],
