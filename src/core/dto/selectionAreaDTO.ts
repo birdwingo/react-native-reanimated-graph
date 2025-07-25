@@ -10,6 +10,8 @@ export interface SelectionAreaProps {
   selectionArea: SharedValue<ReanimatedGraphProps['selectionArea']>,
   selectionAreaData: SharedValue<ReanimatedGraphProps['selectionAreaData']>,
   showSelectionDot: ReanimatedGraphProps['showSelectionDot'],
+  selectionDotRadius: ReanimatedGraphProps['selectionDotRadius'],
+  selectionDotExpansion: ReanimatedGraphProps['selectionDotExpansion'],
   selectionLines: ReanimatedGraphProps['selectionLines'],
   selectionLineColor: ReanimatedGraphProps['selectionLineColor'],
   color: ReanimatedGraphProps['color'],

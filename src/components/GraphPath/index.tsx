@@ -6,7 +6,7 @@ import { createPath } from '../../core/helpers/worklets';
 import { GraphPathProps } from '../../core/dto/graphPathDTO';
 import { MASK_ID } from '../../core/constants/data';
 
-const GraphPath: FC<GraphPathProps> = ( { pathRef, points, type } ) => {
+const GraphPath: FC<GraphPathProps> = ( { pathRef, points, type, strokeWidth, strokeLinecap, strokeDasharray } ) => {
 
   const animatedProps = useAnimatedProps( () => ( { d: createPath( points.value, type ) } ) );
 
@@ -17,8 +17,9 @@ const GraphPath: FC<GraphPathProps> = ( { pathRef, points, type } ) => {
         animatedProps={animatedProps}
         stroke="white"
         fill="transparent"
-        strokeWidth="2"
-        strokeLinecap="round"
+        strokeWidth={strokeWidth}
+        strokeLinecap={strokeLinecap}
+        strokeDasharray={strokeDasharray}
       />
     </Mask>
   );

@@ -16,6 +16,8 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
   selectionArea,
   selectionAreaData,
   showSelectionDot,
+  selectionDotRadius,
+  selectionDotExpansion,
   selectionLines,
   selectionLineColor,
   color,
@@ -122,8 +124,8 @@ const SelectionArea: FC<SelectionAreaProps> = ( {
       {showVertical && <AnimatedPath animatedProps={selectionVertical} stroke={selectionLineColor} strokeDasharray="4,4" />}
       {showSelectionDot && (
         <>
-          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} r="3" />
-          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} fillOpacity="0.1" r="12" />
+          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} r={selectionDotRadius} />
+          <AnimatedCircle animatedProps={animatedCircleProps} fill={color} fillOpacity="0.1" r={selectionDotRadius + selectionDotExpansion} />
         </>
       )}
     </>

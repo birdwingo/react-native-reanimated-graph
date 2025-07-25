@@ -5,5 +5,7 @@ import { PointData } from './graphDTO';
 export interface GraphPathProps {
   pathRef: React.RefObject<Path>,
   points: SharedValue<PointData[]>,
-  type: 'line' | 'curve',
+  strokeWidth?: number,
+  strokeLinecap?: 'butt' | 'round' | 'square',
+  strokeDasharray?: number[],
 }

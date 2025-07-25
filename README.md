@@ -109,13 +109,20 @@ export default YourComponent;
  `yAxisLegendQuantity`   | number                                       | 4                       | The quantity of y-axis legend values to display.
  `showExtremeValues`     | boolean                                      | true                    | Whether to show extreme values (min and max) on the graph.
  `showBlinkingDot`       | boolean                                      | false                   | Whether to show a blinking dot on the graph. (Will be placed at the last point of the graph)
+ `blinkingDotRadius`     | number                                       | 5                       | The radius of the blinking dot.
+ `blinkingDotExpansion`  | number                                       | 10                      | The expansion of the blinking dot.
  `showSelectionDot`      | boolean                                      | true                    | Whether to show the selection dot on the graph while hovering.
+ `selectionDotRadius`    | number                                       | 5                       | The radius of the selection dot.
+ `selectionDotExpansion` | number                                       | 10                      | The expansion of the selection dot.
  `selectionLines`        |'horizontal'\|'vertical'\|'both'\|'none'      | 'both'                  | The type of selection lines to display.
  `selectionLineColor`    | string                                       | '#D4D4D4'               | The color of the selection lines.
  `gestureEnabled`        | boolean                                      | true                    | Whether to enable gestures on the graph.
  `containerStyle`        | ViewProps['style']                           |                         | The style object to customize the container of the graph.
  `graphStyle`            | ViewProps['style']                           |                         | The style object to customize the graph.
  `textStyle`             | TextProps['style']                           |                         | The style object to customize the text elements in the graph.
+ `strokeWidth`           | number                                       | 2                       | The width of the graph line stroke.
+ `strokeLinecap`         | 'round'\|'butt'\|'square'                    | 'round'                 | The shape to be used at the end of the graph line.
+ `strokeDasharray`       | number[]                                     | []                      | An array of numbers defining the pattern of dashes and gaps used to stroke the graph line.
  `renderXAxisLegend`     | (value: number, index: number) => void       |                         | A function to render custom x-axis legend values. It takes two arguments, `value` - the x-axis value for which the legend is being rendered & `index` - the index of the x-axis value on legend.
  `renderYAxisLegend`     | (value: number, index: number) => void       |                         | A function to render custom y-axis legend values. It takes two arguments, `value` - the y-axis value for which the legend is being rendered & `index` - the index of the y-axis value on legend.
  `renderExtremeValue`    | (value: number, type: 'min'\|'max') => void  |                         | A function to render custom extreme values. It takes two arguments, `value` - the extreme value to be rendered, `type` - the type of extreme value, either minimum or maximum.

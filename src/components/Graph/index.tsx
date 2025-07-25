@@ -48,13 +48,20 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
   yAxisLegendQuantity = AXIS_LEGEND_QUANTITY,
   showExtremeValues = true,
   showBlinkingDot = false,
+  blinkingDotRadius = 3,
+  blinkingDotExpansion = 10,
   showSelectionDot = true,
+  selectionDotRadius = 4,
+  selectionDotExpansion = 10,
   selectionLines = 'both',
   selectionLineColor = '#D4D4D4',
   gestureEnabled = true,
   containerStyle = {},
   graphStyle = {},
   textStyle = {},
+  strokeWidth = 2,
+  strokeLinecap = 'round',
+  strokeDasharray = [],
   renderYAxisLegend,
   renderXAxisLegend,
   renderExtremeValue,
@@ -221,7 +228,14 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
 
   const Graph = useMemo( () => (
     <GraphWrapper width={width} height={height} onLayout={onLayout} style={graphStyle}>
-      <GraphPath pathRef={pathRef} points={points} type={type} />
+      <GraphPath
+        pathRef={pathRef}
+        points={points}
+        type={type}
+        strokeWidth={strokeWidth}
+        strokeLinecap={strokeLinecap}
+        strokeDasharray={strokeDasharray}
+      />
       <SelectionArea
         width={graphWidth}
         height={height}
@@ -230,6 +244,8 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         selectionArea={selectionAreaValue}
         selectionAreaData={selectionAreaDataValue}
         showSelectionDot={showSelectionDot}
+        selectionDotRadius={selectionDotRadius}
+        selectionDotExpansion={selectionDotExpansion}
         selectionLines={selectionLines}
         selectionLineColor={selectionLineColor}
         color={colorValue}
@@ -238,7 +254,7 @@ const ReanimatedGraph = forwardRef<ReanimatedGraphPublicMethods, ReanimatedGraph
         data={data}
         gestureEnabled={gestureEnabled}
       />
-      <BlinkingDot show={showBlinkingDotValue} color={colorValue} points={points} />
+      <BlinkingDot show={showBlinkingDotValue} color={colorValue} points={points} radius={blinkingDotRadius} expansion={blinkingDotExpansion} />
       {showExtremeValues && (
       <Extremes
         width={graphWidth}

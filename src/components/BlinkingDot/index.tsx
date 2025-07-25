@@ -7,7 +7,7 @@ import { BlinkingDotProps } from '../../core/dto/blinkingDotDTO';
 import { ANIMATION_DURATION } from '../../core/constants/data';
 import { AnimatedCircle } from '../Animated';
 
-const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
+const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points, radius, expansion } ) => {
 
   const animation = useSharedValue( 0 );
 
@@ -26,7 +26,7 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
   const animatedProps = useAnimatedProps( () => ( blinkingDot.value ) );
   const animationProps = useAnimatedProps( () => ( show.value ? {
     ...blinkingDot.value,
-    r: String( interpolate( animation.value, [ 0, 1 ], [ 3, 13 ] ) ),
+    r: String( interpolate( animation.value, [ 0, 1 ], [ radius, radius + expansion ] ) ),
     opacity: interpolate( animation.value, [ 0, 1 ], [ 1, 0.1 ] ),
   } : blinkingDot.value ) );
 
@@ -61,7 +61,7 @@ const BlinkingDot: FC<BlinkingDotProps> = ( { show, color, points } ) => {
 
   return (
     <>
-      <AnimatedCircle animatedProps={animatedProps} fill={color} r="3" testID="blinkingDot" />
+      <AnimatedCircle animatedProps={animatedProps} fill={color} r={radius} testID="blinkingDot" />
       <AnimatedCircle animatedProps={animationProps} fill={color} />
     </>
   );
